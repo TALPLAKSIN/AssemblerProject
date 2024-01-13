@@ -1,0 +1,3 @@
+/Users/talplaksin/CLionProjects/M1/cmake-build-debug/CMakeFiles/M1.dir
+/Users/talplaksin/CLionProjects/M1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/talplaksin/CLionProjects/M1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
