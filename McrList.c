@@ -17,3 +17,35 @@ McrList NewMcr(char *name, int start) {
     new_mcr->next = NULL;
     return new_mcr;
 }
+void InsertMcrToList(McrList *head, McrList new_mcr) {
+    if ((*head)==NULL) /* if the list is empty */
+        *head = new_mcr;
+    else {
+        /*Make next of new node as head*/
+        new_mcr->next = (*head);
+        /*move the head to point to the new node*/
+        (*head) = new_mcr;
+    }
+}
+
+McrList SearchMcr(McrList mcr, char *name) {
+    McrList temp;
+    temp = mcr;
+    if(mcr == NULL || name == NULL)
+        return NULL;
+    if(strcmp(mcr->name, name) == 0)
+        return temp;
+    return SearchMcr(mcr->next, name);
+}
+
+int HandelMcrName(char *name) {
+    int i;
+    if (name != NULL && isalpha(name[0]) && strlen(name) <= MAX_LABEL_LENGTH) {
+        for (i = 0; i < strlen(name); i++) {
+            if (!isalnum(name[i]) && name[i]!='_')
+                return FALSE;
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
