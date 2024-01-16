@@ -15,5 +15,12 @@ McrList NewMcr(char *name, int start) ;
 void InsertMcrToList(McrList *head, McrList new_mcr) ;
 McrList SearchMcr(McrList mcr, char *name) ;
 int HandelMcrName(char *name) ;
+char *getName(McrList linked) ;
+int getStart(McrList linked) ;
+int getEnd(McrList linked) ;
+McrList getNext(McrList linked);
+void setStart(McrList linked, int start) ;
+void setEnd(McrList linked, int end) ;
+void freelist(McrList head) ;
 
 #endif //M1_MCRLIST_H

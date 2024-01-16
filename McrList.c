@@ -49,3 +49,37 @@ int HandelMcrName(char *name) {
     }
     return FALSE;
 }
+
+char *getName(McrList linked) {
+    return linked->name;
+}
+
+int getStart(McrList linked) {
+    return linked->start;
+}
+
+int getEnd(McrList linked) {
+    return linked->end;
+}
+
+McrList getNext(McrList linked) {
+    return linked->next;
+}
+
+void setStart(McrList linked, int start) {
+    linked->start = start;
+}
+
+void setEnd(McrList linked, int end) {
+    linked->end = end;
+}
+
+void freelist(McrList head) {
+    McrList prev, current = head;
+    while (current != NULL) {
+        prev = current;
+        current = current->next;
+        free(prev->name);
+        free(prev);
+    }
+}
