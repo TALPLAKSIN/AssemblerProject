@@ -16,3 +16,32 @@ FILE *open_file(char *file_name, char *fileExtension, char *mode) {
     file_To_Open = fopen(fileNameWithExtension, mode);
     return file_To_Open;
 }
+void removeFile(char *fileN, char *file_with_extension) {
+    char fileWithExtension[MAX_FILE_NAME] = {0};
+    fullNameToFile(fileN, file_with_extension, fileWithExtension);
+    remove(fileWithExtension);
+}
+
+void readAndCopyRow(FILE *fileN, char lineCheck[MAX_LINE_LENGTH], char lineCopy[MAX_LINE_LENGTH]) {
+    int i;
+    int temp;
+    int flag = 0;
+    for(i=0;i<MAX_LINE_LENGTH;i++){
+        if(flag)
+            lineCheck[i]='\0';
+        else{
+            if((temp=fgetc(fileN))!='\n' && temp!=EOF)
+                lineCheck[i]=(char)temp;
+            else {
+                flag = 1;
+                lineCheck[i]='\n';
+            }
+        }
+    }
+    for(i=0;i<MAX_LINE_LENGTH;i++) {
+        lineCopy[i] = lineCheck[i];
+        printf("%c", lineCopy[i]);
+    }
+    printf("\n");
+}
+
