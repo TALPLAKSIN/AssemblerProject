@@ -8,4 +8,5 @@
 #include "McrList.h"
 #define MAX_LINE_LENGTH 80
 void WriteMcr(FILE *inputFile, int end, FILE *outFile) ;
+FILE *openAndCheckFile(char *fileName) ;
 #endif //M1_OPENMCR_H
