@@ -53,3 +53,23 @@ int SearchAndAddMcr(char *fileName) {
                        fileName);
                 return 0;
             }
+        } else {
+            mcrTemp = (SearchMcr(HeadMcrList, curWord));/*Checking for potential macro words*/
+            if (mcrTemp != NULL) { /* if it's a mcr */
+                prevLocation = ftell(inputFile);
+                fseek(inputFile, getStart(mcrTemp), SEEK_SET);
+                /* we write the macro's code instead of the macro call */
+                WriteMcr(inputFile, getEnd(mcrTemp), outputFile);
+                fseek(inputFile, prevLocation, SEEK_SET);
+            } else {
+                fprintf(outputFile, "%s", lineCopy);/*Copy the row without change*/
+            }
+        }
+    }
+    fclose(inputFile);
+    fclose(outputFile);
+    freelist(HeadMcrList);
+    printf("we have successfully completed the process PreAssembler on file: %s.as\n", fileName);
+    return 1;
+}
+
