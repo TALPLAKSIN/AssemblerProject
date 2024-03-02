@@ -9,4 +9,7 @@
 #include <stdlib.h>
 void LeftSpaces(char line[MAX_LINE_LENGTH]) ;
 void RightSpaces(char line[MAX_LINE_LENGTH]) ;
+int copy(char restOfLine[MAX_LINE_LENGTH], char *line);
+void findError(char *errorMsg, int countLine);
+void findWarning(char *warningMsg, int countLine);
 #endif //M1_OPERATIONLINE_H
