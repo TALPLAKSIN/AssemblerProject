@@ -23,4 +23,8 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
     }
         if ((*TagTemp) != NULL)
             findError("Found multiple definition of the same label", countLine);
+        else
+            findError("label can't be a reserved word", countLine);
+        return FALSE;
+    }
 }
