@@ -18,7 +18,7 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
     if (HandelTagName(restOfLine)) {
         *TagTemp = SearchTag(*HeadTagList, restOfLine);
         if (!(*TagTemp) &&(!savedWord(restOfLine))) {/*check that we have a legal label and exist in the symbolList*/
-
+            InsertTagToList(HeadTagList, *TagTemp);/*we have a legal label --> add to the symbol list*/
     }
 
 }
