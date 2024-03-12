@@ -10,3 +10,6 @@ int HandelTagName(char *name) {
     }
     return FALSE;
 }
+int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, TagList *TagTemp) {
+
+}
