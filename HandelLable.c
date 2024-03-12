@@ -16,6 +16,7 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
     copy(restOfLine, labelName);
     LeftSpaces(restOfLine);
     if (HandelTagName(restOfLine)) {
+        *TagTemp = SearchTag(*HeadTagList, restOfLine);
 
     }
 
