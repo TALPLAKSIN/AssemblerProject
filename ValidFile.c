@@ -22,4 +22,7 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
         return NULL;
     }
     printf("Started first iteration on the file: %s...\n", fileName);
+
+    
 }
+

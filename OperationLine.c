@@ -46,3 +46,48 @@ void findError(char *errorMsg, int countLine) {
 void findWarning(char *warningMsg, int countLine) {
     printf("Warning occurred at line %d: %s\n", countLine, warningMsg);
 }
+
+int savedWord(char *word) {
+    /*check if received word is register/instructionName/command */
+    return (validRegName(word) || instructionValidName(word) || validOpName(word));
+}
+
+int validNumber(char number[MAX_LINE_LENGTH], int flag) {
+    char *temp = NULL;
+    long numIn10Base = 0;
+    if (number != NULL && number[0] != '\0') {
+        numIn10Base = strtol(number, &temp, 10);
+        if (!temp || temp[0] == '\0' || temp[0] == '\r' || temp[0] == '\t' || temp[0] == '\n') {
+            /*A flag that marks the range of possible encoding values(12/14 bits) in the text*/
+
+            //????????????????????????????????????????????????????????????????????
+            if ((flag && numIn10Base <= MAX_NUM_14_BIT && numIn10Base >= MIN_NUM_14_BIT) ||
+                (!flag && numIn10Base <= MAX_NUM_12_BIT && numIn10Base >= MIN_NUM_12_BIT))
+                //????????????????????????????????????????????????????????????????????
+                return TRUE;
+        }
+        return FALSE;
+    }
+    return FALSE;
+}
+
+
+int addSpace(char *line, char restOfLine[MAX_LINE_LENGTH * 2]) {
+    int i = 0;
+    int j = 0;
+    if (line != NULL) {
+        for (i = 0; i < strlen(line); i++) {
+            if (isspace(line[i]) == 0) {
+                restOfLine[j] = line[i];
+                if (line[i] == ',') {/* we add a space right after comma for using with strtok*/
+                    j++;
+                    restOfLine[j] = ' ';
+                }
+                j++;
+            }
+        }
+        restOfLine[j] = '\0';
+        return TRUE;
+    }
+    return FALSE;
+}
