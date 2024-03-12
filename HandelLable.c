@@ -27,4 +27,10 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
             findError("label can't be a reserved word", countLine);
         return FALSE;
     }
+    if (restOfLine[0] != '\0')
+        printf("Error occurred at line %d: Invalid label name: %s\n", countLine, restOfLine);
+    else
+        findError("the label cannot be empty", countLine);
+    return FALSE;
+}
 }
