@@ -15,5 +15,8 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
     labelName[strlen(labelName) - 1] = '\0'; /*we are cutting '\n' from it*/
     copy(restOfLine, labelName);
     LeftSpaces(restOfLine);
+    if (HandelTagName(restOfLine)) {
+
+    }
 
 }
