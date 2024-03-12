@@ -21,5 +21,6 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
             InsertTagToList(HeadTagList, *TagTemp);/*we have a legal label --> add to the symbol list*/
             return TRUE;
     }
-
+        if ((*TagTemp) != NULL)
+            findError("Found multiple definition of the same label", countLine);
 }
