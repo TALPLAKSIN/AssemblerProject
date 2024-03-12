@@ -13,5 +13,6 @@ int HandelTagName(char *name) {
 int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, TagList *TagTemp) {
     char restOfLine[MAX_LINE_LENGTH]={0};
     labelName[strlen(labelName) - 1] = '\0'; /*we are cutting '\n' from it*/
+    copy(restOfLine, labelName);
 
 }
