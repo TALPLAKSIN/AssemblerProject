@@ -14,6 +14,6 @@ static const struct instructionName {
         {".data"},
 };
 enum flagsNames {
-
+    ICcounter, DCcounter, EX, EN, ERROR
 };
 #endif //M1_COMMENDANDINSTRUCTIONS_H
