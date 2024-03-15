@@ -8,5 +8,6 @@ static const struct instructionName {
     const char *name;
 } instructionNames[] = {
         {".define"},
+        {".entry"},
 };
 #endif //M1_COMMENDANDINSTRUCTIONS_H
