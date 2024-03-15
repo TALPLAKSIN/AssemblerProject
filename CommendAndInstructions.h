@@ -9,5 +9,6 @@ static const struct instructionName {
 } instructionNames[] = {
         {".define"},
         {".entry"},
+        {".extern"},
 };
 #endif //M1_COMMENDANDINSTRUCTIONS_H
