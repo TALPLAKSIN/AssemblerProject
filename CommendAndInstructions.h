@@ -6,5 +6,7 @@
 #define M1_COMMENDANDINSTRUCTIONS_H
 static const struct instructionName {
     const char *name;
-} instructionNames[] = {};
+} instructionNames[] = {
+        {".define"},
+};
 #endif //M1_COMMENDANDINSTRUCTIONS_H
