@@ -10,5 +10,6 @@ static const struct instructionName {
         {".define"},
         {".entry"},
         {".extern"},
+        {".string"},
 };
 #endif //M1_COMMENDANDINSTRUCTIONS_H
