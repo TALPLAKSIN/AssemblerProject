@@ -11,5 +11,6 @@ static const struct instructionName {
         {".entry"},
         {".extern"},
         {".string"},
+        {".data"},
 };
 #endif //M1_COMMENDANDINSTRUCTIONS_H
