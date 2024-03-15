@@ -13,4 +13,7 @@ static const struct instructionName {
         {".string"},
         {".data"},
 };
+enum flagsNames {
+
+};
 #endif //M1_COMMENDANDINSTRUCTIONS_H
