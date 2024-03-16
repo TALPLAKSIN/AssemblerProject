@@ -31,11 +31,12 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
     if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
         continue;/*continue to the next line*/
-        if (curWord[strlen(curWord) - 1] == ':') {/* if the current word is label (label must end with ':') */
-            if (!handel_label(&HeadTagList, curWord, IC, countLine, &TagTemp)) {/*checks validate of the label*/
+    if (curWord[strlen(curWord) - 1] == ':') {/* if the current word is label (label must end with ':') */
+        if (!handel_label(&HeadTagList, curWord, IC, countLine, &TagTemp)) {/*checks validate of the label*/
+            markValues[ERROR] = EXIST;/* if a occurred an error */
+            continue;
     } else {
         curWord = strtok(NULL, " \t\n\v\f\r");/* cut the next word in the line */
-    }
     if (!curWord) {
         findError("Found an empty label declaration", countLine);
         markValues[ERROR] = EXIST;/* if a occurred an error */
