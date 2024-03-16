@@ -28,5 +28,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     prevLocation = ftell(inputFile);
     readAndCopyRow(inputFile, lineCheck, lineCopy);
     countLine++;
+    curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
 }
 
