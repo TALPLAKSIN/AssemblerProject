@@ -23,7 +23,7 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     }
     printf("Started first iteration on the file: %s...\n", fileName);
 
-    while (!feof(inputFile)) {}/*over all file, line by line*/
+    while (!feof(inputFile)) {/*over all file, line by line*/
     TagTemp = NULL;
     prevLocation = ftell(inputFile);
     readAndCopyRow(inputFile, lineCheck, lineCopy);
@@ -31,5 +31,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
     if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
         continue;/*continue to the next line*/
+    } else {
 }
 
