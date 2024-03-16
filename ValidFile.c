@@ -32,5 +32,7 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
         continue;/*continue to the next line*/
     } else {
+        curWord = strtok(NULL, " \t\n\v\f\r");/* cut the next word in the line */
+    }
 }
 
