@@ -27,5 +27,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     TagTemp = NULL;
     prevLocation = ftell(inputFile);
     readAndCopyRow(inputFile, lineCheck, lineCopy);
+    countLine++;
 }
 
