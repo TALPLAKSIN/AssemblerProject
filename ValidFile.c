@@ -25,5 +25,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
 
     while (!feof(inputFile)) {}/*over all file, line by line*/
     TagTemp = NULL;
+    prevLocation = ftell(inputFile);
 }
 
