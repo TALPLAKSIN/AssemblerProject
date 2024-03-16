@@ -4,4 +4,6 @@
 #include "TagList.h"
 #include "OperationLine.h"
 #define MAX_LABEL_LENGTH 32
+int HandelTagName(char *name);
+int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, TagList *TagTemp);
 #endif //M1_HANDELLABLE_H

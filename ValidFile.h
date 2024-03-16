@@ -6,6 +6,7 @@
 #define M1_VALIDFILE_H
 #include "TagList.h"
 #include "OperationLine.h"
+#include "HandelLable.h"
 enum flagsNames {
     ICcounter, DCcounter, EX, EN, ERROR
 };
