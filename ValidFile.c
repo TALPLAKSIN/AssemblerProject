@@ -24,5 +24,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     printf("Started first iteration on the file: %s...\n", fileName);
 
     while (!feof(inputFile)) {}/*over all file, line by line*/
+    TagTemp = NULL;
 }
 
