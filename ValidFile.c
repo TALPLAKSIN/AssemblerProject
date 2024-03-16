@@ -29,5 +29,7 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     readAndCopyRow(inputFile, lineCheck, lineCopy);
     countLine++;
     curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
+    if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
+        continue;/*continue to the next line*/
 }
 
