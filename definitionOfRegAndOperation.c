@@ -18,5 +18,6 @@ static const struct operationConsts {
     const char *command;
     int opcode;
     int numOfOperation;
+    int startOp;
 
 };
