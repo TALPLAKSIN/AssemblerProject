@@ -14,3 +14,9 @@ static const struct registerConsts {
                 {"r6", 6},
                 {"r7", 7}
 };
+static const struct operationConsts {
+    const char *command;
+    int opcode;
+    int numOfOperation;
+
+};
