@@ -4,4 +4,5 @@
 static const struct registerConsts {
     const char *name;
     int value;
-};
+    /*An array representing all valid registers*/
+}
