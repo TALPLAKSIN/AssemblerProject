@@ -8,4 +8,6 @@ static const struct registerConsts {
 }registers[] = {{"r0", 0},
                 {"r1", 1},
                 {"r2", 2},
+                {"r3", 3},
+                {"r4", 4},
 };
