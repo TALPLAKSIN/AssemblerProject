@@ -6,4 +6,5 @@ static const struct registerConsts {
     int value;
     /*An array representing all valid registers*/
 }registers[] = {{"r0", 0},
+                {"r1", 1},
 };
