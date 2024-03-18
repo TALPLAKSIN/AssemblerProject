@@ -19,5 +19,6 @@ static const struct operationConsts {
     int opcode;
     int numOfOperation;
     int startOp;
+    int endOp;
 
 };
