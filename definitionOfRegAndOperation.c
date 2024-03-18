@@ -7,4 +7,5 @@ static const struct registerConsts {
     /*An array representing all valid registers*/
 }registers[] = {{"r0", 0},
                 {"r1", 1},
+                {"r2", 2},
 };
