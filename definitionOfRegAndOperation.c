@@ -10,4 +10,5 @@ static const struct registerConsts {
                 {"r2", 2},
                 {"r3", 3},
                 {"r4", 4},
+                {"r5", 5},
 };
