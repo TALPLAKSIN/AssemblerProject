@@ -14,4 +14,7 @@ static const struct instructionName {
 enum flagsNames {
     ICcounter, DCcounter, EX, EN, ERROR
 };
+int
+instructionsFormat(TagList *HeadTagList, char *curWord, int *DC, FILE *checksEntry, int countLine, TagList *TagTemp,
+                   int *markValues, long prevLocation, FILE *inputFile);
 #endif //M1_COMMENDANDINSTRUCTIONS_H
