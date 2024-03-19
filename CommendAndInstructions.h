@@ -1,9 +1,7 @@
-//
-// Created by טל פלקסין on 15/03/2024.
-//
 
 #ifndef M1_COMMENDANDINSTRUCTIONS_H
 #define M1_COMMENDANDINSTRUCTIONS_H
+#include "HandelLable.h"
 static const struct instructionName {
     const char *name;
 } instructionNames[] = {
