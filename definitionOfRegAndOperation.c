@@ -48,5 +48,5 @@ int check_reg_name(char *validName) {
     }
     return FALSE;
 }
-
+int get_reg_number(char *validName) {}
 
