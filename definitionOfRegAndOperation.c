@@ -54,5 +54,9 @@ int get_reg_number(char *validName) {
         if (strcmp(validName, registers[i].name) == 0)
             return registers[i].value;
     }
+    return FALSE;
 }
+int check_op_name(char *command) {
+    int i;
 
+}

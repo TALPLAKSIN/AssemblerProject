@@ -11,5 +11,5 @@
 #define MAX_NUM_REGISTERS 7
 int check_reg_name(char *validName);
 int get_reg_number(char *validName);
-
+int check_op_name(char *command);
 #endif //M1_DEFINITIONOFREGANDOPERATION_H
