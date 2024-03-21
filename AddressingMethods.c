@@ -11,4 +11,5 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
                     FILE *inputFile, TagList *HeadTagList) {
     int opNumber;
     int flag;
+    char restOfLine[MAX_LINE_LENGTH] = {0};
 }
