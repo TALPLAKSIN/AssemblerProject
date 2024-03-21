@@ -25,5 +25,6 @@ static const struct operationConsts {
 }operation[] = {{"mov", 0,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
                 {"cmp", 1,  2, ALL_OPERATION,     ALL_OPERATION},
                 {"add", 2,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
+                {"sub", 3,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
 
 
