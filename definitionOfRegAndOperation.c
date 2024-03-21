@@ -46,6 +46,7 @@ int check_reg_name(char *validName) {
         if (strcmp(validName, registers[i].name) == 0)
             return TRUE;
     }
+    return FALSE;
 }
 
 
