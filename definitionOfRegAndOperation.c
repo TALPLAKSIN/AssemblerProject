@@ -64,3 +64,6 @@ int check_op_name(char *command) {
     }
     return FALSE;
 }
+int get_opcode(char *command)}{
+
+}
