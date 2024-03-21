@@ -33,5 +33,6 @@ static const struct operationConsts {
                 {"dec", 8,  1, 0,                 WITHOUT_FIRST_OPERATION},
                 {"jmp", 9,  1, 0,                 WITHOUT_FIRST_OPERATION},
                 {"bne", 10, 1, 0,                 WITHOUT_FIRST_OPERATION},
+                {"red", 11, 1, 0,                 WITHOUT_FIRST_OPERATION},
 
 
