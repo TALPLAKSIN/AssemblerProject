@@ -26,5 +26,6 @@ static const struct operationConsts {
                 {"cmp", 1,  2, ALL_OPERATION,     ALL_OPERATION},
                 {"add", 2,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
                 {"sub", 3,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
+                {"not", 4,  1, 0,                 WITHOUT_FIRST_OPERATION},
 
 
