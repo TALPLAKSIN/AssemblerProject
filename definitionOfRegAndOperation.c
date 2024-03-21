@@ -62,5 +62,5 @@ int check_op_name(char *command) {
         if (!strcmp(command, operation[i].command))
             return TRUE;
     }
-
+    return FALSE;
 }
