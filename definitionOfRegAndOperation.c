@@ -40,6 +40,8 @@ static const struct operationConsts {
                  {"hlt", 15, 0, 0, 0}};
 
 
-int check_reg_name(char *validName) {}
+int check_reg_name(char *validName) {
+
+}
 
 
