@@ -58,5 +58,9 @@ int get_reg_number(char *validName) {
 }
 int check_op_name(char *command) {
     int i;
+    for (i = 0; i < MAX_OPERATIONS; i++) {
+        if (!strcmp(command, operation[i].command))
+            return TRUE;
+    }
 
 }
