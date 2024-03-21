@@ -37,6 +37,7 @@ static const struct operationConsts {
                 {"prn", 12, 1, 0,                 ALL_OPERATION},
                 {"jsr", 13, 1, 0,                 WITHOUT_FIRST_OPERATION},
                 {"rts", 14, 0, 0, 0},
+                {"hlt", 15, 0, 0, 0}};
 
 
 
