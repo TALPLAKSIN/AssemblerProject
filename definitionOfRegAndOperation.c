@@ -41,7 +41,7 @@ static const struct operationConsts {
 
 
 int check_reg_name(char *validName) {
-
+    int i;
 }
 
 
