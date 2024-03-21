@@ -70,4 +70,4 @@ int get_opcode(char *command)}{
         if (!strcmp(command, operation[i].command))
             return operation[i].opcode;
     }
-}
+}    return NON;
