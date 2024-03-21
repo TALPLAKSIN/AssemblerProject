@@ -20,5 +20,6 @@ static const struct operationConsts {
     int numOfOperation;
     int startOp;
     int endOp;
-
+/*An array representing all legal operations, their number,
+ amount of parameters, source address, destination address, for each method*/
 }
