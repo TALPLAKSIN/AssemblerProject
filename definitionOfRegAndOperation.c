@@ -73,4 +73,6 @@ int get_opcode(char *command)}{
     return NON;
 }
 
-int get_num_of_operation(char *command) {}
+int get_num_of_operation(char *command) {
+    int i;
+}
