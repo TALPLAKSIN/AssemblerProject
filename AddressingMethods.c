@@ -14,4 +14,5 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     char restOfLine[MAX_LINE_LENGTH] = {0};
     opNumber = get_num_of_operation(command);
     (*IC)++;/* increase IC counter */
+    if (opNumber == 0) {/* if the command doesn't require any operands */
 }
