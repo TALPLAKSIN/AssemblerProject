@@ -10,4 +10,5 @@ int instructionValidName(char *instruction){
 int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine, long previousLocation,
                     FILE *inputFile, TagList *HeadTagList) {
     int opNumber;
+    int flag;
 }
