@@ -22,4 +22,4 @@ static const struct operationConsts {
     int endOp;
 /*An array representing all legal operations, their number,
  amount of parameters, source address, destination address, for each method*/
-}
+}operation[] = {"mov", 0,  2, ALL_OPERATION,     WITHOUT_FIRST_OPERATION},
