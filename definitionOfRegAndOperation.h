@@ -10,4 +10,6 @@
 #define ALL_OPERATION 4
 #define MAX_NUM_REGISTERS 7
 int check_reg_name(char *validName);
+int get_reg_number(char *validName);
+
 #endif //M1_DEFINITIONOFREGANDOPERATION_H
