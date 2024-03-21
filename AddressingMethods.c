@@ -15,4 +15,7 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     opNumber = get_num_of_operation(command);
     (*IC)++;/* increase IC counter */
     if (opNumber == 0) {/* if the command doesn't require any operands */
+        if (!copy(restOfLine, strtok(NULL, " \t\n\v\f\r")))
+            return TRUE;
+
 }
