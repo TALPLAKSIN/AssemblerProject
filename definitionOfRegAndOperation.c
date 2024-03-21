@@ -75,4 +75,9 @@ int get_opcode(char *command)}{
 
 int get_num_of_operation(char *command) {
     int i;
+    for (i = 0; i < MAX_OPERATIONS; i++) {
+        if (strcmp(command, operation[i].command) == 0)
+            return operation[i].numOfOperation;
+    }
+    return NON;
 }
