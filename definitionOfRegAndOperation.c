@@ -31,5 +31,6 @@ static const struct operationConsts {
                 {"lea", 6,  2, ONE_TWO_OPERATION, WITHOUT_FIRST_OPERATION},
                 {"inc", 7,  1, 0,                 WITHOUT_FIRST_OPERATION},
                 {"dec", 8,  1, 0,                 WITHOUT_FIRST_OPERATION},
+                {"jmp", 9,  1, 0,                 WITHOUT_FIRST_OPERATION},
 
 
