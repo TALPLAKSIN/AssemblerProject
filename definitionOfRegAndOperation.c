@@ -48,5 +48,11 @@ int check_reg_name(char *validName) {
     }
     return FALSE;
 }
-int get_reg_number(char *validName) {}
+int get_reg_number(char *validName) {
+    int i;
+    for (i = 0; i <= MAX_NUM_REGISTERS; i++) {
+        if (strcmp(validName, registers[i].name) == 0)
+            return registers[i].value;
+    }
+}
 
