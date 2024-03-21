@@ -64,7 +64,7 @@ int check_op_name(char *command) {
     }
     return FALSE;
 }
-int get_opcode(char *command)}{
+int get_opcode(char *command){
     int i;
     for (i = 0; i < MAX_OPERATIONS; i++) {
         if (!strcmp(command, operation[i].command))
