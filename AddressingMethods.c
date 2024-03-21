@@ -17,5 +17,7 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     if (opNumber == 0) {/* if the command doesn't require any operands */
         if (!copy(restOfLine, strtok(NULL, " \t\n\v\f\r")))
             return TRUE;
-
+        findError("for this command no Operand allowed or any characters", countLine);
+        return FALSE;
+    }
 }
