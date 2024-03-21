@@ -2,6 +2,7 @@
 // Created by טל פלקסין on 20/03/2024.
 //
 #include "CommendAndInstructions.h"
+#include "definitionOfRegAndOperation.h"
 #ifndef M1_ADDRESSINGMETHODS_H
 #define M1_ADDRESSINGMETHODS_H
 
