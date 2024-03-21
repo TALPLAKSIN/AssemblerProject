@@ -13,4 +13,5 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     int flag;
     char restOfLine[MAX_LINE_LENGTH] = {0};
     opNumber = get_num_of_operation(command);
+    (*IC)++;/* increase IC counter */
 }
