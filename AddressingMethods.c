@@ -8,4 +8,6 @@ int instructionValidName(char *instruction){
     return FALSE;
 }
 int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine, long previousLocation,
-                    FILE *inputFile, TagList *HeadTagList) {}
+                    FILE *inputFile, TagList *HeadTagList) {
+    int opNumber;
+}
