@@ -21,4 +21,4 @@ static const struct operationConsts {
     int startOp;
     int endOp;
 
-};
+}
