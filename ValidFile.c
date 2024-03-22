@@ -44,5 +44,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     }
         }else {
             printf("Error occurred at line %d: Invalid command: '%s'\n", countLine, curWord);
-
+            markValues[ERROR] = EXIST;/* if a occurred an error */
+        }
 
