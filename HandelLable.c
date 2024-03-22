@@ -46,5 +46,8 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
         fgets(lineCheck, MAX_LINE_LENGTH, validLabelFile);
         currentLabel = strtok(lineCheck, " \t\n\v\f\r");
         if (!currentLabel) {
+            printf("\n");
+            return flag;
+        }
     }
 }
