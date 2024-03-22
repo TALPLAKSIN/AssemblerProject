@@ -60,4 +60,5 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
                 printf(",'%s'", currentLabel);
             flag = FALSE;
         }
-    }
+    }    return TRUE;
+}
