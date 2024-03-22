@@ -45,5 +45,6 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
         /* iterating through each line(in every line exist 1 label) of the checksLabelFile file */
         fgets(lineCheck, MAX_LINE_LENGTH, validLabelFile);
         currentLabel = strtok(lineCheck, " \t\n\v\f\r");
+        if (!currentLabel) {
     }
 }
