@@ -39,4 +39,5 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
     char lineCheck[MAX_LINE_LENGTH] = {0};
     TagList TagTemp = NULL;
     char *currentLabel = NULL;
+    fseek(validLabelFile, 0, SEEK_SET);
 }
