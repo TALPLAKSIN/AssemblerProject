@@ -42,7 +42,7 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
         markValues[ERROR] = EXIST;/* if a occurred an error */
         continue;
     }
-}
+        }else {
 
 
 
