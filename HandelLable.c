@@ -53,6 +53,7 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
         if (TagTemp != NULL) {
             setUsed(TagTemp, TRUE);
             continue;
-        }
-    }
-}
+        } else {
+            if (flag)
+                printf("The labels is not declared in the code: '%s'", currentLabel);
+                }
