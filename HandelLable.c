@@ -34,3 +34,4 @@ int handel_label(TagList *HeadTagList, char *labelName, int IC, int countLine, T
     return FALSE;
 }
 
+int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {}
