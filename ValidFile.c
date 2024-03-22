@@ -24,26 +24,28 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
     printf("Started first iteration on the file: %s...\n", fileName);
 
     while (!feof(inputFile)) {/*over all file, line by line*/
-    TagTemp = NULL;
-    prevLocation = ftell(inputFile);
-    readAndCopyRow(inputFile, lineCheck, lineCopy);
-    countLine++;
-    curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
-    if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
-        continue;/*continue to the next line*/
-    if (curWord[strlen(curWord) - 1] == ':') {/* if the current word is label (label must end with ':') */
-        if (!handel_label(&HeadTagList, curWord, IC, countLine, &TagTemp)) {/*checks validate of the label*/
-            markValues[ERROR] = EXIST;/* if a occurred an error */
-            continue;
-    } else {
-        curWord = strtok(NULL, " \t\n\v\f\r");/* cut the next word in the line */
-    if (!curWord) {
-        findError("Found an empty label declaration", countLine);
-        markValues[ERROR] = EXIST;/* if a occurred an error */
-        continue;
-    }
-        }else {
-            printf("Error occurred at line %d: Invalid command: '%s'\n", countLine, curWord);
-            markValues[ERROR] = EXIST;/* if a occurred an error */
+        TagTemp = NULL;
+        prevLocation = ftell(inputFile);
+        readAndCopyRow(inputFile, lineCheck, lineCopy);
+        countLine++;
+        curWord = strtok(lineCheck, " \t\n\v\f\r");/* cut the first word in the line */
+        if (!curWord || curWord[0] == ';')/* if line is empty or note ( ';' represent a note) */
+            continue;/*continue to the next line*/
+        if (curWord[strlen(curWord) - 1] == ':') {/* if the current word is label (label must end with ':') */
+            if (!handel_label(&HeadTagList, curWord, IC, countLine, &TagTemp)) {/*checks validate of the label*/
+                markValues[ERROR] = EXIST;/* if a occurred an error */
+                continue;
+            } else {
+                curWord = strtok(NULL, " \t\n\v\f\r");/* cut the next word in the line */
+                if (!curWord) {
+                    findError("Found an empty label declaration", countLine);
+                    markValues[ERROR] = EXIST;/* if a occurred an error */
+                    continue;
+                }
+            }else {
+                printf("Error occurred at line %d: Invalid command: '%s'\n", countLine, curWord);
+                markValues[ERROR] = EXIST;/* if a occurred an error */
+            }
         }
-
+        update_IC_symbols(&HeadTagList,
+            IC); /* Updating all data and string symbol (add IC final value to their address counter) */
