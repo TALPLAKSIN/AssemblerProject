@@ -56,4 +56,8 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
         } else {
             if (flag)
                 printf("The labels is not declared in the code: '%s'", currentLabel);
-                }
+            else
+                printf(",'%s'", currentLabel);
+            flag = FALSE;
+        }
+    }
