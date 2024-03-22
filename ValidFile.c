@@ -43,6 +43,6 @@ TagList SearchAndAddSymbol(char *fileName,int *markValues) {/* each cell of the 
         continue;
     }
         }else {
-
+            printf("Error occurred at line %d: Invalid command: '%s'\n", countLine, curWord);
 
 
