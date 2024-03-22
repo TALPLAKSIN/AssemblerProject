@@ -49,5 +49,6 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
             printf("\n");
             return flag;
         }
+        TagTemp = SearchTag(*HeadTagList, currentLabel);/*checks if the label is defined in the symbol list */
     }
 }
