@@ -75,5 +75,7 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
         /* iterating through each line(in every line exist 1 label) of the checksEntry file */
         fgets(lineCheck, MAX_LINE_LENGTH, checksEntry);
         currentLabel = strtok(lineCheck, " \t\n\v\f\r");
+        if (!currentLabel)/* There are empty line */
+            return TRUE;
     }
 }
