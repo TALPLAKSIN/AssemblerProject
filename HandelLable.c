@@ -71,5 +71,6 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
     fseek(checksEntry, 0, SEEK_SET);
     while (!feof(checksEntry)) {
         currentLabel = NULL;
+        memset(lineCheck, 0, MAX_LINE_LENGTH);
     }
 }
