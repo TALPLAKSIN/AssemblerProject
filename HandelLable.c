@@ -74,5 +74,6 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
         memset(lineCheck, 0, MAX_LINE_LENGTH);
         /* iterating through each line(in every line exist 1 label) of the checksEntry file */
         fgets(lineCheck, MAX_LINE_LENGTH, checksEntry);
+        currentLabel = strtok(lineCheck, " \t\n\v\f\r");
     }
 }
