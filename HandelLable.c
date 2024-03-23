@@ -64,4 +64,6 @@ int handel_label_not_found(FILE *validLabelFile, TagList *HeadTagList) {
     return TRUE;
 }
 
-int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){}
+int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
+    char lineCheck[MAX_LINE_LENGTH] = {0};
+}
