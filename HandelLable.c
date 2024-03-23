@@ -78,5 +78,9 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
         if (!currentLabel)/* There are empty line */
             return TRUE;
         TagTemp = SearchTag(*HeadTagList, currentLabel);/*checks if the label is defined in the tag list */
+        if ((TagTemp) != NULL && (getType(TagTemp) != EXTERNAL)) {/*make sure that the label is not  defined as EXTERNAL type*/
+            setType(TagTemp, ENTRY);/* if it's a legal label, type defined as ENTRY */
+            continue;
+        }
     }
 }
