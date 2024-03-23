@@ -89,5 +89,5 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
                 printf("a label can be entry or external, but prohibited both\n");
             return FALSE;
         }
-    }
+    } return TRUE;
 }
