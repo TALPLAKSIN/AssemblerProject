@@ -77,5 +77,6 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
         currentLabel = strtok(lineCheck, " \t\n\v\f\r");
         if (!currentLabel)/* There are empty line */
             return TRUE;
+        TagTemp = SearchTag(*HeadTagList, currentLabel);/*checks if the label is defined in the tag list */
     }
 }
