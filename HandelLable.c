@@ -68,4 +68,5 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
     char lineCheck[MAX_LINE_LENGTH] = {0};
     TagList TagTemp = NULL;
     char *currentLabel;
+    fseek(checksEntry, 0, SEEK_SET);
 }
