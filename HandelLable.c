@@ -82,5 +82,8 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
             setType(TagTemp, ENTRY);/* if it's a legal label, type defined as ENTRY */
             continue;
         }
+        if (!(TagTemp) || getType(TagTemp) == EXTERNAL) {
+            if (!(TagTemp))
+                printf("no declaration on this label\n");
     }
 }
