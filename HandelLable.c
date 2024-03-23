@@ -85,5 +85,9 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
         if (!(TagTemp) || getType(TagTemp) == EXTERNAL) {
             if (!(TagTemp))
                 printf("no declaration on this label\n");
+            else
+                printf("a label can be entry or external, but prohibited both\n");
+            return FALSE;
+        }
     }
 }
