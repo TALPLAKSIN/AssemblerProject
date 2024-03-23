@@ -69,4 +69,5 @@ int handel_label_entry(FILE *checksEntry, TagList *HeadTagList){
     TagList TagTemp = NULL;
     char *currentLabel;
     fseek(checksEntry, 0, SEEK_SET);
+    while (!feof(checksEntry)) {}
 }
