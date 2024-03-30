@@ -21,5 +21,8 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
         return FALSE;
     }
     flag = copy(restOfLine, strtok(NULL, ""));
-    if (flag && restOfLine[0] != ',') {}
+    if (flag && restOfLine[0] != ',') {
+        removeLeftWSpaces(restOfLine);
+
+    }
 }
