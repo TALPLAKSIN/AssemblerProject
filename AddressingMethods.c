@@ -20,5 +20,6 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
         findError("for this command no Operand allowed or any characters", countLine);
         return FALSE;
     }
-    flag = make_copy(restOfLine, strtok(NULL, ""));
+    flag = copy(restOfLine, strtok(NULL, ""));
+    if (flag && restOfLine[0] != ',') {}
 }
