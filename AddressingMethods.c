@@ -24,6 +24,9 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     if (flag && restOfLine[0] != ',') {
         removeLeftWSpaces(restOfLine);
         removeRightWSpaces(restOfLine);
+        if(opNumber==1){
+
+        }
 
     }
 }
