@@ -7,6 +7,10 @@
 #include "FileMethod.h"
 #include <ctype.h>
 #include <stdlib.h>
+#include "definitionOfRegAndOperation.h"
+#include "TagList.h"
+#include "OperationLine.h"
+#include "HandelLable.h"
 void LeftSpaces(char line[MAX_LINE_LENGTH]) ;
 void RightSpaces(char line[MAX_LINE_LENGTH]) ;
 int copy(char restOfLine[MAX_LINE_LENGTH], char *line);
