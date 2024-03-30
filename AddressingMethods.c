@@ -33,4 +33,7 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     }
     if (!flag) /* if its empty - Missing operand*/
         findError("Missing operand", countLine);
+    else  /* if it starts with a comma, it we have illegal comma */
+        findError("illegal commas found right after the command name", countLine);
+    return FALSE;
 }
