@@ -24,9 +24,10 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
     if (flag && restOfLine[0] != ',') {
         removeLeftWSpaces(restOfLine);
         removeRightWSpaces(restOfLine);
-        if(opNumber==1){
-
-        }
-
-    }
+        if(opNumber==1)
+            return validDestOneOp(command, IC, validLabelFile, countLine, restOfLine, previousLocation, inputFile,
+                                  HeadTagList);
+        else
+            return validDestSourceTwoOp(command, IC, validLabelFile, countLine, restOfLine, previousLocation, inputFile,
+                                        HeadTagList);
 }
