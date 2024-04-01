@@ -37,3 +37,4 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
         findError("illegal commas found right after the command name", countLine);
     return FALSE;
 }
+addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]) {}
