@@ -40,4 +40,5 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
 addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]) {
     int i = 0;
     char *tag;
+    char firstOperand[MAX_LINE_LENGTH] = {0};
 }
