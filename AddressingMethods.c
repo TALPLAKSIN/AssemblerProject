@@ -41,7 +41,10 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
     int i = 0;
     char *tag;
     char firstOperand[MAX_LINE_LENGTH] = {0};
-    if (operand != NULL && operand[0] != '\0') {}
+    if (operand != NULL && operand[0] != '\0') {
+        if (check_reg_name(operand))/*if it legal register, its directRegisterAddress */
+            return directRegisterAddress;
+    }
 
 
 
