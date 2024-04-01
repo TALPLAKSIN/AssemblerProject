@@ -41,4 +41,11 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
     int i = 0;
     char *tag;
     char firstOperand[MAX_LINE_LENGTH] = {0};
+    if (operand != NULL && operand[0] != '\0') {}
+
+
+
+
+
+
 }
