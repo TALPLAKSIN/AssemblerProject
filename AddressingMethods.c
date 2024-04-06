@@ -49,6 +49,8 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
                 fprintf(validLabelFile, "%s\n", operand);
             return directAddress;
         }
+        /*if address starts with # and a number right after that, it's immediately addressed*/
+        if (operand[i] == '#'&& strlen(operand)>1&&operand[i+1] != '#')
 
 
 
