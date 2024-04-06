@@ -59,6 +59,10 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
         make_copy(firstOperand, operand);
         tag = strtok(firstOperand, "[");
         if (operand[strlen(operand - 1) == ']']) {
+            if (HandelTagName(tag)) {
+                if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
+                    fprintf(validLabelFile, "%s\n", operand);
+        }
 
 
 
