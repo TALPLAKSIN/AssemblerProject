@@ -44,6 +44,8 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
     if (operand != NULL && operand[0] != '\0') {
         if (check_reg_name(operand))/*if it legal register, its directRegisterAddress */
             return directRegisterAddress;
+        if (HandelTagName(operand)) {/*when address is a valid label name,it's directAddressed*/
+            if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
     }
 
 
