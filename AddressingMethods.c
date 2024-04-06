@@ -56,7 +56,8 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
             return immediateAddress;
         if (HeadTagList!=NULL && checkAndReplaceDefine(HeadTagList, operand,lineCopy))
             return immediateAddress;
-
+        make_copy(firstOperand, operand);
+        tag = strtok(firstOperand, "[");
 
 
 
