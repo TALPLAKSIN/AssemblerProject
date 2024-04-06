@@ -54,6 +54,8 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
             operand = strtok(operand, "#");
         if (checkValidNumber(operand, FALSE))
             return immediateAddress;
+        if (HeadTagList!=NULL && checkAndReplaceDefine(HeadTagList, operand,lineCopy))
+            return immediateAddress;
 
 
 
