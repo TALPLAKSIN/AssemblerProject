@@ -51,6 +51,9 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
         }
         /*if address starts with # and a number right after that, it's immediately addressed*/
         if (operand[i] == '#'&& strlen(operand)>1&&operand[i+1] != '#')
+            operand = strtok(operand, "#");
+        if (checkValidNumber(operand, FALSE))
+            return immediateAddress;
 
 
 
