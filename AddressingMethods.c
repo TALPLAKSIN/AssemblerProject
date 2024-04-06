@@ -46,7 +46,9 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
             return directRegisterAddress;
         if (HandelTagName(operand)) {/*when address is a valid label name,it's directAddressed*/
             if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
-    }
+                fprintf(validLabelFile, "%s\n", operand);
+            return directAddress;
+        }
 
 
 
