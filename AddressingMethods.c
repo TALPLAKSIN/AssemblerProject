@@ -58,7 +58,7 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
             return immediateAddress;
         make_copy(firstOperand, operand);
         tag = strtok(firstOperand, "[");
-
+        if (operand[strlen(operand - 1) == ']']) {
 
 
 
