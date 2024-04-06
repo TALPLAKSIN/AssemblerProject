@@ -63,6 +63,16 @@ addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,
                 if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
                     fprintf(validLabelFile, "%s\n", operand);
         }
+            tag = strtok(NULL, "]");
+            if (checkValidNumber(tag, FALSE))
+                return constantIndexAddress;
+            if (checkAndReplaceDefine(HeadTagList, tag, inputFile, previousLocation))
+                return constantIndexAddress;
+        }
+    }
+}
+return NON; /*if nothing, just return NON - "no exist" */
+}
 
 
 
