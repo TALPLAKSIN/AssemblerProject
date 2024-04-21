@@ -38,44 +38,38 @@ int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabe
     return FALSE;
 }
 
-addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]) {
+addressingMode getAddressingMode(char *operand, FILE *fileValidLabels, int mark,TagList *HeadTagList,char originalLine[]) {
     int i = 0;
     char *tag;
-    char firstOperand[MAX_LINE_LENGTH] = {0};
+    char num_one_operand[MaxInputLength] = {0};
     if (operand != NULL && operand[0] != '\0') {
         if (check_reg_name(operand))/*if it legal register, its directRegisterAddress */
             return directRegisterAddress;
-        if (HandelTagName(operand)) {/*when address is a valid label name,it's directAddressed*/
-            if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
-                fprintf(validLabelFile, "%s\n", operand);
+        if (HandelTagName(operand)) {
+            if (mark)/*store all labels in the file and,completing this pass, verify that they have all been accurately defined*/
+                fprintf(fileValidLabels, "%s\n", operand);
             return directAddress;
-        }
-        /*if address starts with # and a number right after that, it's immediately addressed*/
+        } /*if an address begins with '#' followed by a number, its immediateAddress*/
         if (operand[i] == '#'&& strlen(operand)>1&&operand[i+1] != '#')
             operand = strtok(operand, "#");
         if (checkValidNumber(operand, FALSE))
             return immediateAddress;
-        if (HeadTagList!=NULL && checkAndReplaceDefine(HeadTagList, operand,lineCopy))
+        if (HeadTagList!=NULL && checkAndReplaceDefine(HeadTagList, operand,originalLine))
             return immediateAddress;
-        make_copy(firstOperand, operand);
-        tag = strtok(firstOperand, "[");
+        make_copy(num_one_operand, operand);
+        /*if an address begins with '[]' and inside has a valid number, its constantIndexAddress*/
+        tag = strtok(num_one_operand, "[");
         if (operand[strlen(operand - 1) == ']']) {
             if (HandelTagName(tag)) {
-                if (flag)/*We will save all the labels in the file, and at the end of the first pass we will check that they have all been defined correctly*/
-                    fprintf(validLabelFile, "%s\n", operand);
-        }
-            tag = strtok(NULL, "]");
-            if (checkValidNumber(tag, FALSE))
-                return constantIndexAddress;
-            if (checkAndReplaceDefine(HeadTagList, tag, inputFile, previousLocation))
-                return constantIndexAddress;
+                if (mark)/*store all labels in the file and,completing this pass, verify that they have all been accurately defined*/
+                    fprintf(fileValidLabels, "%s\n", tag);
+                tag = strtok(NULL, "]");
+                if (checkValidNumber(tag, FALSE))
+                    return constantIndexAddress;
+                if (HeadTagList!=NULL && checkAndReplaceDefine(HeadTagList, tag, originalLine))
+                    return constantIndexAddress;
+            }
         }
     }
-}
-return NON; /*if nothing, just return NON - "no exist" */
-}
-
-
-
-
+    return NON; /* Return NON if the addressing not adjusted or the operand is invalid */
 }
