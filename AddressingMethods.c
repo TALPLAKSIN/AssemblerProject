@@ -73,3 +73,23 @@ addressingMode getAddressingMode(char *operand, FILE *fileValidLabels, int mark,
     }
     return NON; /* Return NON if the addressing not adjusted or the operand is invalid */
 }
+
+int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, char validLineArray[], TagList *HeadTagList,char originalLine[]) {
+    addressingMode destination_operand = getAddressingMode(validLineArray, fileValidLabels, TRUE,HeadTagList, originalLine);
+    (*instructionCounter)++;/* Increment the instruction counter to point the next cell */
+    if (destination_operand == directAddress || destination_operand == directRegisterAddress)
+        return TRUE;
+    if ((strcmp(sentence, "prn") == 0) && (destination_operand == immediateAddress))
+        return TRUE;
+    (*instructionCounter)++;/* increase IC to point the next cell */
+    if (destination_operand == constantIndexAddress &&
+        ((strcmp(sentence, "dec") == 0) || (strcmp(sentence, "red") == 0) || (strcmp(sentence, "prn") == 0) ||
+         (strcmp(sentence, "not") == 0) || (strcmp(sentence, "clr") == 0) || (strcmp(sentence, "inc") == 0)))
+        return TRUE;
+    (*instructionCounter) -= 2;
+    if (destination_operand == NON)
+        identifyError("Invalid definition of a Operand!", num0fLine);
+    else
+        identifyError("Invalid destination address!", num0fLine);
+    return FALSE;
+}

@@ -41,4 +41,21 @@ int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine,
                 @return the addressing type if it valid ,otherwise NON
  */
 addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]);
+/*
+   This function validates the addressing mode for a command that requires one operand
+   parameters:
+                @param sentence - a pointer to the sentence
+                @param instructionCounter - a pointer to IC counter
+                @param fileValidLabels -  file that contains all the label names that appears
+                @param num0fLine -   a pointer to the number current line
+                @param validLineArray - An array that keeps the line,which all the tests make on
+                                    the line to check validation by dividing it into parts as required
+                @param HeadTagList - Tag list pointer
+                @param originalLine - An array containing the current line for check without changing the line for example without cutting
+    return:
+                @return TRUE if it valid ,otherwise FALSE
+ */
+
+int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, char validLineArray[], TagList *HeadTagList,char originalLine[]) {
+    addressingMode destination_operand = getAddressingMode(validLineArray, fileValidLabels, TRUE,HeadTagList, originalLine);
 #endif //M1_ADDRESSINGMETHODS_H
