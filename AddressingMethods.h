@@ -30,8 +30,7 @@ int instructionValidName(char *instruction);
     return:
                 @return TRUE if the command sentence valid ,otherwise FALSE
  */
-int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine, long previousLocation,
-                    FILE *inputFile, TagList *HeadTagList);
+int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,char originalLine[]);
 
 /*
    This function checks the addressing method and return the type

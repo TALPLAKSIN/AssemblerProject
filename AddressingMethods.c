@@ -9,8 +9,7 @@ int instructionValidName(char *name) {
     return FALSE;
 }
 
-int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,
-                    char originalLine[]) {
+int int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,char originalLine[]) {
     int opNumber;
     int mark;
     char validLineArray[MaxInputLength] = {0};
