@@ -16,6 +16,18 @@
                 @return TRUE if it valid instruction for example(data,string...),otherwise FALSE
  */
 int instructionValidName(char *instruction);
+/*
+   This function checks whether the given sentence is valid
+   parameters:
+                @param sentence - a pointer to the sentence
+                @param instructionCounter - a pointer to IC counter
+                @param fileValidLabels -  file that contains all the label names that appears
+                @param num0fLine -  a pointer to the number current line
+                @param HeadTagList - Tag list pointer
+                @param originalLine - An array containing the current line for check without changing the line for example without cutting
+    return:
+                @return TRUE if the command sentence valid ,otherwise FALSE
+ */
 int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine, long previousLocation,
                     FILE *inputFile, TagList *HeadTagList);
 addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]);

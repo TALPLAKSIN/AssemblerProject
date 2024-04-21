@@ -9,36 +9,35 @@ int instructionValidName(char *name) {
     return FALSE;
 }
 
-int validateCommand(char *command, int *IC, FILE *validLabelFile, int countLine, long previousLocation,
-                    FILE *inputFile, TagList *HeadTagList) {
+int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,char originalLine[]) {
     int opNumber;
-    int flag;
-    char restOfLine[MAX_LINE_LENGTH] = {0};
-    opNumber = get_num_of_operation(command);
-    (*IC)++;/* increase IC counter */
-    if (opNumber == 0) {/* if the command doesn't require any operands */
-        if (!copy(restOfLine, strtok(NULL, " \t\n\v\f\r")))
-            return TRUE;
-        findError("for this command no Operand allowed or any characters", countLine);
+    int mark;
+    char validLineArray[MaxInputLength] = {0};
+    opNumber = get_num_of_operation(sentence);/*Get the operation number from the command*/
+    (*instructionCounter)++;/* Increment the instruction counter */
+    if (opNumber == 0) {/* If the command doesn't require any operands */
+        if (!make_copy(validLineArray, strtok(NULL, " \t\n\v\f\r")))
+            return TRUE;/* Return TRUE if no characters are found*/
+        identifyError("for this command no Operand allowed or any characters", num0fLine);
         return FALSE;
     }
-    flag = copy(restOfLine, strtok(NULL, ""));
-    if (flag && restOfLine[0] != ',') {
-        removeLeftWSpaces(restOfLine);
-        removeRightWSpaces(restOfLine);
-        if (opNumber == 1)
-            return validDestOneOp(command, IC, validLabelFile, countLine, restOfLine, previousLocation, inputFile,
-                                  HeadTagList);
-        else
-            return validDestSourceTwoOp(command, IC, validLabelFile, countLine, restOfLine, previousLocation, inputFile,
-                                        HeadTagList);
-    }
-    if (!flag) /* if its empty - Missing operand*/
-        findError("Missing operand", countLine);
-    else  /* if it starts with a comma, it we have illegal comma */
-        findError("illegal commas found right after the command name", countLine);
+    mark = make_copy(validLineArray, strtok(NULL, ""));
+    if (mark && validLineArray[0] != ',') {
+        /* Remove left and right whitespaces*/
+        removeLeftWSpaces(validLineArray);
+        removeRightWSpaces(validLineArray);
+        if (opNumber == 1) /* if the command require one operand */
+            return validDestOneOp(sentence, instructionCounter, fileValidLabels, num0fLine, validLineArray,HeadTagList, originalLine);
+        else /* if the command require two operands */
+            return validDestSourceTwoOp(sentence, instructionCounter, fileValidLabels, num0fLine, validLineArray,HeadTagList,originalLine);
+    }/*Handle error cases for missing operand or illegal commas*/
+    if (!mark) /* if its empty - Missing operand*/
+        identifyError("Missing operand", num0fLine);
+    else  /* if it starts with a comma - illegal comma */
+        identifyError("illegal commas found right after the command name", num0fLine);
     return FALSE;
 }
+
 addressingMode getAddressingMode(char *operand, FILE *checksLabelFile, int flag,TagList *HeadTagList,char lineCopy[]) {
     int i = 0;
     char *tag;
