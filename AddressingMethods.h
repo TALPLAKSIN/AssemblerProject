@@ -1,6 +1,4 @@
-//
-// Created by טל פלקסין on 20/03/2024.
-//
+
 #include "CommendAndInstructions.h"
 #include "definitionOfRegAndOperation.h"
 
@@ -9,6 +7,14 @@
 
 #define MAX_NUM_INSTRUCTION 4
 
+/*The numerical represents the different addressing methods*/
+typedef enum addressing {
+    immediateAddress = 0,
+    directAddress = 1,
+    constantIndexAddress = 2,
+    directRegisterAddress = 3
+} addressingMode;
+
 /*
    This function checks whether the instruction has valid name
    parameters:
@@ -16,8 +22,7 @@
     return:
                 @return TRUE if it valid instruction for example(data,string...),otherwise FALSE
  */
-int instructionValidName(char *instruction);
-
+int instructionValidName(char *name);
 /*
    This function checks whether the given sentence is valid
    parameters:
@@ -30,8 +35,7 @@ int instructionValidName(char *instruction);
     return:
                 @return TRUE if the command sentence valid ,otherwise FALSE
  */
-int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,char originalLine[]);
-
+int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine , TagList *HeadTagList,char originalLine[]);
 /*
    This function checks the addressing method and return the type
    parameters:
@@ -42,8 +46,8 @@ int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabe
     return:
                 @return the addressing type if it valid ,otherwise NON
  */
-addressingMode getAddressingMode(char *operand, FILE *fileValidLabels, int mark,TagList *HeadTagList,char originalLine[]) ;
-
+addressingMode
+getAddressingMode(char *operand, FILE *fileValidLabels, int mark, TagList *HeadTagList,char originalLine[]);
 /*
    This function validates the addressing mode for a command that requires one operand
    parameters:
@@ -59,11 +63,8 @@ addressingMode getAddressingMode(char *operand, FILE *fileValidLabels, int mark,
                 @return TRUE if it valid ,otherwise FALSE
  */
 
-int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, char validLineArray[],
-                   TagList *HeadTagList, char originalLine[]) {
-    addressingMode destination_operand = getAddressingMode(validLineArray, fileValidLabels, TRUE, HeadTagList,
-                                                           originalLine);
-    /*
+int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, char validLineArray[], TagList *HeadTagList,char originalLine[]);
+/*
    This function validates the addressing mode for a command that requires two operand
    parameters:
                 @param sentence - a pointer to the sentence
@@ -77,6 +78,9 @@ int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabel
     return:
                 @return TRUE if it valid ,otherwise FALSE
  */
-int validDestSourceTwoOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine,
-                             char validLineArray[], TagList *HeadTagList, char originalLine[]);
-#endif //M1_ADDRESSINGMETHODS_H
+int validDestSourceTwoOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, char validLineArray[], TagList *HeadTagList,char originalLine[]);
+
+#endif
+
+
+
