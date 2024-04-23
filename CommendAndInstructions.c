@@ -1,7 +1,8 @@
 #include "CommendAndInstructions.h"
 
 int
-instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine, TagList *TagTemp,
+instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
+                   TagList *TagTemp,
                    int *flagsArray, long prevLocation, FILE *input_file, char originalLine[]) {
     if (!strcmp(".define", current_word))
         return checkDefineFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp);
@@ -14,7 +15,8 @@ instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, F
     } else if (!strcmp(".string", current_word))
         return checkStringFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp);
     else if (!strcmp(".data", current_word))
-        return checkDataFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp, prevLocation, input_file, originalLine);
+        return checkDataFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp, prevLocation, input_file,
+                               originalLine);
     identifyError("found an illegal instruction", num0fLine);
     return FALSE;
 }
@@ -27,8 +29,8 @@ int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
     if (make_copy(validLineArray, curLine)) {
         removeLeftWSpaces(validLineArray);
         removeRightWSpaces(validLineArray);
-        defineName = strtok(validLineArray," \t\n\v\f\r");/* cut the next word in the line */
-        curLine = strtok(NULL,"");/* cut the next word in the line */
+        defineName = strtok(validLineArray, " \t\n\v\f\r");/* cut the next word in the line */
+        curLine = strtok(NULL, "");/* cut the next word in the line */
         if (HandelTagName(defineName)) {
             *TagTemp = SearchTag(*HeadTagList, defineName);
             if (!(*TagTemp) && (!is_reserved_word(defineName))) {
@@ -44,7 +46,7 @@ int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
                             value = strtol(validLineArray2, &curLine, 10);
                             setValueOrSize(*TagTemp, (int) value);
                             setType(*TagTemp, MDEFINE);
-                            InsertTagToList(HeadTagList,*TagTemp);
+                            InsertTagToList(HeadTagList, *TagTemp);
                             return TRUE;
                         }
                         identifyError("Invalid number - must be an 10 base number", num0fLine);
@@ -73,18 +75,19 @@ int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
 }
 
 int checkAndReplaceDefine(TagList *HeadTagList, char *defineName, char originalLine[]) {
-    char value[MaxInputLength]={0};
+    char value[MaxInputLength] = {0};
     TagList TagTemp = SearchTag(*HeadTagList, defineName);
-    if (TagTemp == NULL || getType(TagTemp)!=MDEFINE)
+    if (TagTemp == NULL || getType(TagTemp) != MDEFINE)
         return FALSE;
     else {
         sprintf(value, "%d", getValueOrSize(TagTemp));
-        WriteDefine( getName(TagTemp), value,originalLine) ;
+        WriteDefine(getName(TagTemp), value, originalLine);
         return TRUE;
     }
 }
 
-int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *ValidEntryFile, int num0fLine, TagList *TagTemp) {
+int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
+                     TagList *TagTemp) {
     char validLineArray[MaxInputLength];
     if (*TagTemp != NULL) { /* if had a declaration of a label before .entry , then we delete the tag */
         identifyWarning("found an entry instruction with a tag declared to it. new tag got deleted.", num0fLine);
@@ -142,7 +145,8 @@ int checkStringFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
         if (validLineArray[i] != '\0') {
             if (validLineArray[i] == '\"') { /*String must start with " */
                 for (i = 1;
-                     i < strlen(validLineArray) && validLineArray[i] != '\n' && validLineArray[i] != '\0' && !validStr; i++) {
+                     i < strlen(validLineArray) && validLineArray[i] != '\n' && validLineArray[i] != '\0' &&
+                     !validStr; i++) {
                     Length++;
                     if (validLineArray[i] == '\"')
                         validStr = TRUE;/* valid string, ending with "*/
@@ -173,8 +177,9 @@ int checkStringFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
     return FALSE;
 }
 
-int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp, long prevLocation,
-                    FILE *inputFile,char originalLine[])  {
+int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp,
+                    long prevLocation,
+                    FILE *inputFile, char originalLine[]) {
     int foundNumbers = 0;
     char *nextNumber = NULL;
     int sizeArray = 0;
@@ -185,7 +190,8 @@ int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int n
         setType(*TagTemp, DATA);
     }
     if (adding_space(curLine, validLineArray)) { /*adding space after comma*/
-        if ((validLineArray[0] != '\0') && (validLineArray[0] != ',') && (validLineArray[strlen(validLineArray) - 2] != ',')) {
+        if ((validLineArray[0] != '\0') && (validLineArray[0] != ',') &&
+            (validLineArray[strlen(validLineArray) - 2] != ',')) {
             nextNumber = strtok(validLineArray, ",");
             while (nextNumber != NULL) {
                 memset(tempNumber, 0, MaxInputLength);
@@ -193,7 +199,8 @@ int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int n
                 make_copy(tempNumber, nextNumber);
                 removeLeftWSpaces(tempNumber); /*remove white characters from the left of the string */
                 if (tempNumber[0] != '\0' && (checkValidNumber(tempNumber, TRUE) ||
-                                              checkAndReplaceDefine(HeadTagList, tempNumber,originalLine))) {/*flag used to mark that the number cloud be 14 bit */
+                                              checkAndReplaceDefine(HeadTagList, tempNumber,
+                                                                    originalLine))) {/*flag used to mark that the number cloud be 14 bit */
                     (*dataCounter)++;/*increase DC according to the amount of numbers*/
                     sizeArray++;
                     nextNumber = strtok(NULL, ",");
