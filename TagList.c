@@ -7,7 +7,7 @@ struct nodeTag {
     char *name;/* name of the node */
     int used;
     int valueOrSize;/* for define represent value, for data represent size array*/
-    int address; /* Address of the symbol */
+    int address; /* Address of the tag */
     Type type;/* Tag type */
     TagList next;  /* Next linked */
 };
@@ -21,10 +21,9 @@ TagList NewTag(char *name, int address) {
     new_tag->valueOrSize = 0;
     new_tag->address = address;
     new_tag->next = NULL;
-    new_tag->type = OPERATION;
+    new_tag->type = CODE;
     return new_tag;
 }
-
 
 void InsertTagToList(TagList *head, TagList new_tag) {
     if ((*head) == NULL) /* if the list is empty */
@@ -47,17 +46,22 @@ TagList SearchTag(TagList tag, char *name) {
     return SearchTag(tag->next, name);
 }
 
+
 void allUsed(TagList tag, int phase) {
     int flag = TRUE;
     while (tag != NULL) {
         if (tag->used != EXIST) {/*see unused link*/
             if (flag) {/*the flag marks the first time we see unused link*/
-                if (phase == 0)/*message belonging to a reader layout at  phase zero */
+                if (phase == 0) {/*message belonging to a reader layout at  phase zero */
                     printf("Warning occurred at the process, macros we didn't use: '%s'", tag->name);
-                else/*message belonging to the phase one*/
-                    printf("Warning occurred at the process, symbols we didn't use: '%s'", tag->name);
-                flag = FALSE;
-            } else
+                    flag = FALSE;
+                } else {/*message belonging to the phase one*/
+                    if (!(strcmp(tag->name, "MAIN") == 0) && tag->type != MDEFINE) {
+                        printf("Warning occurred at the process, tag we didn't use: '%s'", tag->name);
+                        flag = FALSE;
+                    }
+                }
+            } else if (!(strcmp(tag->name, "MAIN") == 0) && tag->type != MDEFINE)
                 printf(",'%s'", tag->name);/*Printing another unused name*/
         }
         tag = tag->next;/* move to check the next node*/
@@ -78,9 +82,9 @@ char *getName(TagList tag) {
 }
 
 
-/*int getAddress(TagList tag) {
+int getAddress(TagList tag) {
     return tag->address;
-}*/
+}
 
 int getValueOrSize(TagList tag) {
     return tag->valueOrSize;
@@ -90,9 +94,9 @@ Type getType(TagList tag) {
     return tag->type;
 }
 
-/*TagList getNext(TagList tag) {
+TagList getNextTag(TagList tag) {
     return tag->next;
-}*/
+}
 
 void setUsed(TagList tag, int used) {
     tag->used = used;
@@ -124,11 +128,35 @@ void freelist(TagList head) {
     }
 }
 
-void update_IC_symbols(TagList *linked, int IC) {
+void print1(TagList tag) {
+    unsigned long i;
+    while (tag != NULL) {
+        printf("%s", tag->name);
+        for (i = strlen(tag->name); i < 15; i++)
+            printf(" ");
+        if (tag->type == MDEFINE)
+            printf("MDEFINE   \t");
+        if (tag->type == CODE)
+            printf("CODE      \t");
+        if (tag->type == DATA)
+            printf("DATA      \t");
+        if (tag->type == ENTRY)
+            printf("ENTRY     \t");
+        if (tag->type == EXTERNAL)
+            printf("EXTERNAL  \t");
+        if (tag->type == MDEFINE)
+            printf("%d\n", tag->valueOrSize);
+        else
+            printf("%d\n", tag->address);
+        tag = tag->next;/* move to check the next node*/
+    }
+}
+
+void changeICTags(TagList *linked, int instructionCounter) {
     TagList temp = *linked;
     while (temp != NULL) {
         if (temp->type == DATA)/* if it's a data instruction */
-            temp->address += IC;/* updates the IC counter */
+            temp->address += instructionCounter;/* updates the IC counter */
         temp = temp->next;
     }
 }
