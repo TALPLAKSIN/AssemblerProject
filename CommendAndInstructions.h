@@ -1,5 +1,5 @@
-#ifndef MMN14_22_03_24_COMMENDANDINSTRUCTIONS_H
-#define MMN14_22_03_24_COMMENDANDINSTRUCTIONS_H
+#ifndef COMMENDANDINSTRUCTIONS_H
+#define COMMENDANDINSTRUCTIONS_H
 
 #include "HandelLable.h"
 
@@ -18,6 +18,7 @@ static const struct instructionNames {
 enum flagsNames {
     ICcounter, DCcounter, EX, EN, ERROR
 };
+
 /*
    This function checks whether the current word is one of instruction names
    for example (define,entry,data..) and call to handel with chosen instruction
@@ -37,8 +38,10 @@ enum flagsNames {
  */
 
 int
-instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine, TagList *TagTemp,
-                   int *flagsArray, long prevLocation, FILE *input_file,char originalLine[]);
+instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
+                   TagList *TagTemp,
+                   int *flagsArray, long prevLocation, FILE *input_file, char originalLine[]);
+
 /*
    This function checks .entry instruction validation
    parameters:
@@ -51,7 +54,9 @@ instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, F
     return:
                 @return TRUE if the instruction is valid ,otherwise FALSE
  */
-int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *ValidEntryFile, int num0fLine, TagList *TagTemp);
+int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
+                     TagList *TagTemp);
+
 /*
    This function checks .extern instruction validation
    parameters:
@@ -64,6 +69,7 @@ int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *Va
                 @return TRUE if the instruction is valid ,otherwise FALSE
  */
 int checkExternFormat(TagList *HeadTagList, char *tag, int *dataCounter, int num0fLine, TagList *TagTemp);
+
 /*
    This function checks .string instruction validation
    parameters:
@@ -77,6 +83,7 @@ int checkExternFormat(TagList *HeadTagList, char *tag, int *dataCounter, int num
  */
 
 int checkStringFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp);
+
 /*
    This function checks .data instruction validation
    parameters:
@@ -91,8 +98,10 @@ int checkStringFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
     return:
                 @return instruction method if it valid ,otherwise FALSE
  */
-int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp, long prevLocation,
-                    FILE *inputFile,char originalLine[]) ;
+int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp,
+                    long prevLocation,
+                    FILE *inputFile, char originalLine[]);
+
 /*
    This function checks .define instruction validation
    parameters:
@@ -105,6 +114,7 @@ int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int n
                 @return TRUE if the instruction is valid ,otherwise FALSE
  */
 int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp);
+
 /*
    This function checks if a Mcr definition exists in the tag list, retrieves its value,
    converts it to a string, and replaces the Mcr definition in the provided
@@ -116,7 +126,7 @@ int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
                 @return TRUE if definition was successfully replaced ,otherwise FALSE
 
  */
-int checkAndReplaceDefine(TagList *HeadTagList, char *defineName,char originalLine[]);
+int checkAndReplaceDefine(TagList *HeadTagList, char *defineName, char originalLine[]);
 
 #endif
 
