@@ -1,15 +1,20 @@
-//
-// Created by טל פלקסין on 02/03/2024.
-//
+#ifndef VALIDFILE_H
+#define VALIDFILE_H
 
-#ifndef M1_VALIDFILE_H
-#define M1_VALIDFILE_H
-#include "TagList.h"
-#include "OperationLine.h"
-#include "HandelLable.h"
-enum flagsNames {
-    ICcounter, DCcounter, EX, EN, ERROR
-};
+#include "AddressingMethods.h"
 
-TagList SearchAndAddSymbol(char *fileName,int *markValues);
-#endif //M1_VALIDFILE_H
+/*
+  This function is the main function of the first phase after the pre-assembler phase of the program.
+  which proving the validation of all the lines appearing in the received file,call the right method to
+  all the instruction, and printed messages on the screen of errors and warnings and updates the counters
+  parameters:
+                @param file_name - the received file
+                @param flagsArray - array represent a flag (5 cell - ICcounter, DCcounter, EX, EN, ERROR)
+  return:
+                @return non
+ */
+TagList HandelAndAddTag(char *file_name, int *flagsArray);
+
+#endif
+
+
