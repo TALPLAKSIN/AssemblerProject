@@ -1,9 +1,5 @@
-
-#ifndef MMN14_22_03_24_DEFINITIONOFREGANDOPERATION_H
-#define MMN14_22_03_24_DEFINITIONOFREGANDOPERATION_H
-
-
-
+#ifndef DEFINITIONOFREGANDOPERATION_H
+#define DEFINITIONOFREGANDOPERATION_H
 
 #define MAX_OPERATIONS 16
 #define ONE_TWO_OPERATION 2
@@ -20,6 +16,7 @@
                 @return TRUE if it valid register,otherwise FALSE
  */
 int check_reg_name(char *word);
+
 /*
    This function return  register number if it valid for example (r0,r1..r7)
    parameters:
@@ -28,6 +25,7 @@ int check_reg_name(char *word);
                 @return register number,otherwise FALSE
  */
 int get_reg_number(char *word);
+
 /*
    This function checks if operation name is valid for example (mov,cmp..)
    parameters:
@@ -36,6 +34,7 @@ int get_reg_number(char *word);
                 @return TRUE if its valid operation,otherwise FALSE
  */
 int check_op_name(char *word);
+
 /*
    This function return the opcode operation number if it valid operation for example (mov-->opcode = 0)
    parameters:
@@ -44,6 +43,7 @@ int check_op_name(char *word);
                 @return opcode number,otherwise NON
  */
 int get_opcode(char *word);
+
 /*
    This function return the number of operation if it valid operation
    parameters:
