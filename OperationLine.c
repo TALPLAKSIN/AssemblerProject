@@ -1,69 +1,69 @@
-
 #include "OperationLine.h"
+#include "AddressingMethods.h"
+#include <string.h>
 
-void LeftSpaces(char line[MAX_LINE_LENGTH]) {
+void removeLeftWSpaces(char currLine[MaxInputLength]) {
     int i = 0, j = 0;
-    if (line != NULL) {
+    if (currLine != NULL) {
         /*raised i++ j++ count if white characters appear left from the string,*/
-        for (; i < strlen(line) &&
-               (line[i] == ' ' || line[i] == '\t' || line[i] == EOF || line[i] == '\n' ||
-                line[i] == '\r'); i++, j++);
+        for (; i < strlen(currLine) &&
+               (currLine[i] == ' ' || currLine[i] == '\t' || currLine[i] == EOF || currLine[i] == '\n' ||
+                currLine[i] == '\r'); i++, j++);
         /*if white characters appear left of the string, so delete them and advance the string to the left*/
-        for (i = 0; j <= strlen(line); i++, j++)
-            line[i] = line[j];
-        line[j] = '\0';
+        for (i = 0; j <= strlen(currLine); i++, j++)
+            currLine[i] = currLine[j];
+        currLine[j] = '\0';
     }
 }
 
-void RightSpaces(char line[MAX_LINE_LENGTH]) {
+void removeRightWSpaces(char currLine[MaxInputLength]) {
     int i;
-    if (line != NULL) {
-        i = strlen(line) - 1;
+    if (currLine != NULL) {
+        i = strlen(currLine) - 1;
         /*if white characters appear right from the string,so put their '\0'*/
-        while (i >= 0 && (line[i] == ' ' || line[i] == '\t' || line[i] == EOF || line[i] == '\n' || line[i] == '\r')) {
-            line[i] = '\0'=[poi7643]
+        while (i >= 0 && (currLine[i] == ' ' || currLine[i] == '\t' || currLine[i] == EOF || currLine[i] == '\n' ||
+                          currLine[i] == '\r')) {
+            currLine[i] = '\0';
             i--;
         }
     }
 }
-int copy(char restOfLine[MAX_LINE_LENGTH], char *line) {
+
+int make_copy(char validLineArray[MaxInputLength], char *currLine) {
     int i;
-    if (line != NULL && (MAX_LINE_LENGTH >= strlen(line) - 1)) {
+    if (currLine != NULL && (MaxInputLength >= strlen(currLine) - 1)) {
         /*Copying the string into an array*/
-        for (i = 0; i < strlen(line); ++i)
-            restOfLine[i] = line[i];
-        if (i < MAX_LINE_LENGTH)
-            restOfLine[i + 1] = '\0';
+        for (i = 0; i < strlen(currLine); ++i)
+            validLineArray[i] = currLine[i];
+        if (i < MaxInputLength)
+            validLineArray[i + 1] = '\0';
         return TRUE;
     }
     return FALSE;/*If the string is null or exceeds the input limits*/
 }
 
-void findError(char *errorMsg, int countLine) {
-    printf("Error occurred at line %d: %s\n", countLine, errorMsg);
+void identifyError(char *error, int num0fLine) {
+    printf("Error occurred at line %d: %s\n", num0fLine, error);
 }
 
-void findWarning(char *warningMsg, int countLine) {
-    printf("Warning occurred at line %d: %s\n", countLine, warningMsg);
+void identifyWarning(char *warning, int num0fLine) {
+    printf("Warning occurred at line %d: %s\n", num0fLine, warning);
 }
 
-int savedWord(char *word) {
+int is_reserved_word(char *word) {
     /*check if received word is register/instructionName/command */
-    return (validRegName(word) || instructionValidName(word) || validOpName(word));
+    return (check_reg_name(word) || instructionValidName(word) || check_op_name(word));
 }
 
-int validNumber(char number[MAX_LINE_LENGTH], int flag) {
+int checkValidNumber(char num[MaxInputLength], int mark) {
     char *temp = NULL;
     long numIn10Base = 0;
-    if (number != NULL && number[0] != '\0') {
-        numIn10Base = strtol(number, &temp, 10);
+    if (num != NULL && num[0] != '\0') {
+        numIn10Base = strtol(num, &temp, 10);
         if (!temp || temp[0] == '\0' || temp[0] == '\r' || temp[0] == '\t' || temp[0] == '\n') {
             /*A flag that marks the range of possible encoding values(12/14 bits) in the text*/
-
-            //????????????????????????????????????????????????????????????????????
-            if ((flag && numIn10Base <= 14 && numIn10Base >= 14) ||
-                (!flag && numIn10Base <= 14 && numIn10Base >= 14))
-                //????????????????????????????????????????????????????????????????????
+            if ((mark && numIn10Base <= MAX_NUM_14_BIT && numIn10Base >= MIN_NUM_14_BIT) ||
+                (!mark && numIn10Base <= MAX_NUM_12_BIT && numIn10Base >= MIN_NUM_12_BIT))
                 return TRUE;
         }
         return FALSE;
@@ -72,21 +72,21 @@ int validNumber(char number[MAX_LINE_LENGTH], int flag) {
 }
 
 
-int addSpace(char *line, char restOfLine[MAX_LINE_LENGTH * 2]) {
+int adding_space(char *currLine, char validLineArray[MaxInputLength * 2]) {
     int i = 0;
     int j = 0;
-    if (line != NULL) {
-        for (i = 0; i < strlen(line); i++) {
-            if (isspace(line[i]) == 0) {
-                restOfLine[j] = line[i];
-                if (line[i] == ',') {/* we add a space right after comma for using with strtok*/
+    if (currLine != NULL) {
+        for (i = 0; i < strlen(currLine); i++) {
+            if (isspace(currLine[i]) == 0) {
+                validLineArray[j] = currLine[i];
+                if (currLine[i] == ',') {/* we add a space right after comma for using with strtok*/
                     j++;
-                    restOfLine[j] = ' ';
+                    validLineArray[j] = ' ';
                 }
                 j++;
             }
         }
-        restOfLine[j] = '\0';
+        validLineArray[j] = '\0';
         return TRUE;
     }
     return FALSE;
