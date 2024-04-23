@@ -118,6 +118,12 @@ build CMakeFiles/M1.dir/convertInstructions.c.o: C_COMPILER__M1_Debug /Users/tal
   OBJECT_DIR = CMakeFiles/M1.dir
   OBJECT_FILE_DIR = CMakeFiles/M1.dir
 
+build CMakeFiles/M1.dir/encodeAndWriteToFile.c.o: C_COMPILER__M1_Debug /Users/talplaksin/CLionProjects/M1/encodeAndWriteToFile.c || cmake_object_order_depends_target_M1
+  DEP_FILE = CMakeFiles/M1.dir/encodeAndWriteToFile.c.o.d
+  FLAGS = -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0 -std=gnu90
+  OBJECT_DIR = CMakeFiles/M1.dir
+  OBJECT_FILE_DIR = CMakeFiles/M1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target M1
@@ -126,7 +132,7 @@ build CMakeFiles/M1.dir/convertInstructions.c.o: C_COMPILER__M1_Debug /Users/tal
 #############################################
 # Link the executable M1
 
-build M1: C_EXECUTABLE_LINKER__M1_Debug CMakeFiles/M1.dir/main.c.o CMakeFiles/M1.dir/FileMethod.c.o CMakeFiles/M1.dir/OpenMcr.c.o CMakeFiles/M1.dir/TagList.c.o CMakeFiles/M1.dir/OperationLine.c.o CMakeFiles/M1.dir/ValidFile.c.o CMakeFiles/M1.dir/HandelLable.c.o CMakeFiles/M1.dir/CommendAndInstructions.c.o CMakeFiles/M1.dir/definitionOfRegAndOperation.c.o CMakeFiles/M1.dir/AddressingMethods.c.o CMakeFiles/M1.dir/convertAddress.c.o CMakeFiles/M1.dir/convertInstructions.c.o
+build M1: C_EXECUTABLE_LINKER__M1_Debug CMakeFiles/M1.dir/main.c.o CMakeFiles/M1.dir/FileMethod.c.o CMakeFiles/M1.dir/OpenMcr.c.o CMakeFiles/M1.dir/TagList.c.o CMakeFiles/M1.dir/OperationLine.c.o CMakeFiles/M1.dir/ValidFile.c.o CMakeFiles/M1.dir/HandelLable.c.o CMakeFiles/M1.dir/CommendAndInstructions.c.o CMakeFiles/M1.dir/definitionOfRegAndOperation.c.o CMakeFiles/M1.dir/AddressingMethods.c.o CMakeFiles/M1.dir/convertAddress.c.o CMakeFiles/M1.dir/convertInstructions.c.o CMakeFiles/M1.dir/encodeAndWriteToFile.c.o
   FLAGS = -g -arch x86_64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.0
   OBJECT_DIR = CMakeFiles/M1.dir
   POST_BUILD = :

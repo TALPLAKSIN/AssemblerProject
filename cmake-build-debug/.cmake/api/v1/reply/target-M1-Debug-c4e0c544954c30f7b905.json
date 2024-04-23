@@ -63,7 +63,8 @@
 				16,
 				18,
 				20,
-				22
+				22,
+				24
 			]
 		}
 	],
@@ -107,7 +108,8 @@
 				16,
 				18,
 				20,
-				22
+				22,
+				24
 			]
 		},
 		{
@@ -125,7 +127,8 @@
 				17,
 				19,
 				21,
-				23
+				23,
+				25
 			]
 		}
 	],
@@ -261,6 +264,17 @@
 		{
 			"backtrace" : 1,
 			"path" : "convertInstructions.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "encodeAndWriteToFile.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "encodeAndWriteToFile.h",
 			"sourceGroupIndex" : 1
 		}
 	],
