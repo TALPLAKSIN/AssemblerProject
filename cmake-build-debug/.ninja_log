@@ -6,3 +6,17 @@
 10	879	1710762627131539629	CMakeFiles/M1.dir/FileMethod.c.o	39d1bb3dddf6edfe
 19	880	1710762627131470629	CMakeFiles/M1.dir/OpenMcr.c.o	465e7aeefe2c31ca
 20	880	1710762627131347295	CMakeFiles/M1.dir/TagList.c.o	c2907758e1f2ca2
+9	289	1713886969831454108	CMakeFiles/M1.dir/ValidFile.c.o	ef01e81027764969
+1	290	1713886969831368024	CMakeFiles/M1.dir/main.c.o	79d083b93e10fa5e
+2	290	1713886969833089066	CMakeFiles/M1.dir/FileMethod.c.o	39d1bb3dddf6edfe
+5	291	1713886969832262816	CMakeFiles/M1.dir/OpenMcr.c.o	465e7aeefe2c31ca
+7	291	1713886969831680399	CMakeFiles/M1.dir/TagList.c.o	c2907758e1f2ca2
+8	292	1713886969831319774	CMakeFiles/M1.dir/OperationLine.c.o	a2283e2222fbe347
+10	292	1713886969831315191	CMakeFiles/M1.dir/HandelLable.c.o	53e9221d60e6e806
+10	292	1713886969834788108	CMakeFiles/M1.dir/CommendAndInstructions.c.o	c1d3a520abf27ab9
+289	356	1713886969901558530	CMakeFiles/M1.dir/definitionOfRegAndOperation.c.o	6ad803a8291e26d1
+291	365	1713886969909988697	CMakeFiles/M1.dir/convertInstructions.c.o	47bbb396bd27c69e
+291	365	1713886969911176698	CMakeFiles/M1.dir/encodeAndWriteToFile.c.o	3c8e5465f17ab229
+292	365	1713886969910544489	CMakeFiles/M1.dir/writeInBaseFour.c.o	c7025dc739443e5e
+290	367	1713886969913177114	CMakeFiles/M1.dir/convertAddress.c.o	d26d91dcef72354a
+290	368	1713886969914991573	CMakeFiles/M1.dir/AddressingMethods.c.o	53499af056448f9a
