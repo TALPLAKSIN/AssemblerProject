@@ -9,7 +9,8 @@ int instructionValidName(char *name) {
     return FALSE;
 }
 
-int int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,char originalLine[]) {
+int validateCommand(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine, TagList *HeadTagList,
+                    char originalLine[]) {
     int opNumber;
     int mark;
     char validLineArray[MaxInputLength] = {0};
@@ -39,6 +40,7 @@ int int validateCommand(char *sentence, int *instructionCounter, FILE *fileValid
         identifyError("illegal commas found right after the command name", num0fLine);
     return FALSE;
 }
+
 
 addressingMode
 getAddressingMode(char *operand, FILE *fileValidLabels, int mark, TagList *HeadTagList, char originalLine[]) {
@@ -98,6 +100,7 @@ int validDestOneOp(char *sentence, int *instructionCounter, FILE *fileValidLabel
         identifyError("Invalid destination address!", num0fLine);
     return FALSE;
 }
+
 
 int validDestSourceTwoOp(char *sentence, int *instructionCounter, FILE *fileValidLabels, int num0fLine,
                          char validLineArray[], TagList *HeadTagList, char originalLine[]) {
