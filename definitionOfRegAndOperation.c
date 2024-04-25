@@ -2,10 +2,10 @@
 #include "TagList.h"
 #include <string.h>
 
+/*Defining and creating all the legal registers in one array and putting a value directly*/
 static const struct regConsts {
     const char *name;
     int num;
-/*all valid registers*/
 } reg[] = {{"r0", 0},
            {"r1", 1},
            {"r2", 2},
@@ -15,7 +15,12 @@ static const struct regConsts {
            {"r6", 6},
            {"r7", 7}
 };
-/* Each operation is defined with its number, opcode, number of operands, and source, destination address*/
+/*Defining and creating all the legal commands in
+ * one array that includes all the relevant features
+ * such as: name, number, number of operands,
+ * legal addressing method for the source operand and
+ * legal addressing method for the target operand
+ * and putting legal values directly*/
 static const struct operationConsts {
     const char *sentence;
     int opcode;
@@ -39,48 +44,48 @@ static const struct operationConsts {
                       {"rts", 14, 0, 0, 0},
                       {"hlt", 15, 0, 0, 0}};
 
-
+/*Checking for a valid name for a register*/
 int check_reg_name(char *word) {
-    int i;
+    int i=0;
     for (i = 0; i <= MAX_NUM_REGISTERS; i++) {
         if (strcmp(word, reg[i].name) == 0)
             return TRUE;
     }
     return FALSE;
 }
-
+/*Checking for a valid value for a register*/
 int get_reg_number(char *word) {
-    int i;
+    int i=0;
     for (i = 0; i <= MAX_NUM_REGISTERS; i++) {
         if (strcmp(word, reg[i].name) == 0)
             return reg[i].num;
     }
     return FALSE;
 }
-
+/*Checking for a valid name for a operation*/
 int check_op_name(char *word) {
-    int i;
+    int i=0;
     for (i = 0; i < MAX_OPERATIONS; i++) {
         if (!strcmp(word, the_operations[i].sentence))
             return TRUE;
     }
     return FALSE;
 }
-
+/*Receiving an opcode of a command*/
 int get_opcode(char *word) {
-    int i;
+    int i=0;
     for (i = 0; i < MAX_OPERATIONS; i++) {
         if (!strcmp(word, the_operations[i].sentence))
             return the_operations[i].opcode;
     }
-    return NON;
+    return NOT_OCCUR;
 }
-
+/*Receiving a num of operation of a command*/
 int get_num_of_operation(char *word) {
-    int i;
+    int i=0;
     for (i = 0; i < MAX_OPERATIONS; i++) {
         if (strcmp(word, the_operations[i].sentence) == 0)
             return the_operations[i].amount_operation;
     }
-    return NON;
+    return NOT_OCCUR;
 }
