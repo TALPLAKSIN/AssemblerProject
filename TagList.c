@@ -130,30 +130,6 @@ void freelist(TagList head) {
     }
 }
 
-void print1(TagList tag) {
-    unsigned long i=0;
-    while (tag != NULL) {
-        printf("%s", tag->name);
-        for (i = strlen(tag->name); i < 15; i++)
-            printf(" ");
-        if (tag->type == MDEFINE)
-            printf("MDEFINE   \t");
-        if (tag->type == CODE)
-            printf("CODE      \t");
-        if (tag->type == DATA)
-            printf("DATA      \t");
-        if (tag->type == ENTRY)
-            printf("ENTRY     \t");
-        if (tag->type == EXTERNAL)
-            printf("EXTERNAL  \t");
-        if (tag->type == MDEFINE)
-            printf("%d\n", tag->valueOrSize);
-        else
-            printf("%d\n", tag->address);
-        tag = tag->next;/* move to check the next node*/
-    }
-}
-
 void changeICTags(TagList *tag, int instructionCounter) {
     TagList temp = *tag;/* Temporary pointer to the tag list */
     while (temp != NULL) {/* Loop through the tag list */

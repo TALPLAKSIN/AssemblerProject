@@ -181,7 +181,6 @@ void setValueOrSize(TagList tag, int valueOrSize);
 int getValueOrSize(TagList tag);
 
 
-void print1(TagList tag);
 
 #endif
 
