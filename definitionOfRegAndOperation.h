@@ -1,12 +1,13 @@
 #ifndef DEFINITIONOFREGANDOPERATION_H
 #define DEFINITIONOFREGANDOPERATION_H
 
+#define MAX_NUM_REGISTERS 7
 #define MAX_OPERATIONS 16
 #define ONE_TWO_OPERATION 2
 #define ONE_THREE_OPERATION 2
 #define WITHOUT_FIRST_OPERATION 3
 #define ALL_OPERATION 4
-#define MAX_NUM_REGISTERS 7
+
 
 /*
    This function checks if register name is valid for example (r0,r1..r7)
