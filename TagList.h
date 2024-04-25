@@ -1,12 +1,12 @@
 #ifndef TAGLIST_H
 #define TAGLIST_H
 
-#define MAX_TAG_LENGTH 32
 #define TRUE 1
 #define FALSE 0
 #define FLAGS 5
-#define NON 9999/*no exist*/
-#define EXIST 1
+#define NOT_OCCUR 1000
+#define OCCUR 1
+
 /*A pointer to a tag list*/
 typedef struct nodeTag *TagList;
 /*tag types option*/
