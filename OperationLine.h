@@ -5,12 +5,14 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-
-#define MAX_NUM_14_BIT 16383
-#define MAX_NUM_12_BIT 4095
-#define MIN_NUM_14_BIT -16383
-#define MIN_NUM_12_BIT -4095
 #define MAX_LINE_LENGTH 80
+/* According to the number of bits that represent a number (12 or 14 bits)
+ * the size of the possible number changes and therefore there is a different check */
+#define MAX_NUM_14_BIT 16383
+#define MIN_NUM_14_BIT -16383
+#define MAX_NUM_12_BIT 4095
+#define MIN_NUM_12_BIT -4095
+
 
 /*
    This function remove all the white spaces at the start of a string
@@ -40,6 +42,17 @@ void removeRightWSpaces(char currLine[MAX_LINE_LENGTH]);
                 @return non
  */
 int make_copy(char validLineArray[MAX_LINE_LENGTH], char *currLine);
+
+
+/*
+   This function cut out operand from received line and changing line to only the operand
+   parameters:
+                @param currLine - received line
+    return:
+                @return non
+ */
+void make_cut(char operand[MAX_LINE_LENGTH]);
+
 
 /*
    This function outputs an error message if there is an error in the code
