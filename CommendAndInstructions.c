@@ -1,47 +1,53 @@
 #include "CommendAndInstructions.h"
 
 int
-instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
-                   TagList *TagTemp,
-                   int *flagsArray, long prevLocation, FILE *input_file, char originalLine[]) {
+instructionsFormat(TagList *HeadTagList, char *current_word, int *dataCounter, FILE *ValidEntryFile, int num0fLine,TagList *TagTemp,int *flagsArray, long prevLocation, FILE *input_file, char originalLine[]) {
+    /* Check if the current word is .define instruction */
     if (!strcmp(".define", current_word))
         return checkDefineFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp);
+        /* Check if the current word is .entry instruction */
     else if (!strcmp(".entry", current_word)) {
-        flagsArray[EN] = EXIST; /* marks that we have entry label  */
+        flagsArray[EN] = OCCUR; /* indicates that we have entry type label*/
         return checkEntryFormat(HeadTagList, strtok(NULL, ""), dataCounter, ValidEntryFile, num0fLine, TagTemp);
+        /* Check if the current word is .extern instruction */
     } else if (!strcmp(".extern", current_word)) {
-        flagsArray[EX] = EXIST;/* marks that we have extern label  */
+        flagsArray[EX] = OCCUR;/* indicates that we have extern type label*/
         return checkExternFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp);
+        /* Check if the current word is .string instruction */
     } else if (!strcmp(".string", current_word))
         return checkStringFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp);
+        /* Check if the current word is .data instruction */
     else if (!strcmp(".data", current_word))
         return checkDataFormat(HeadTagList, strtok(NULL, ""), dataCounter, num0fLine, TagTemp, prevLocation, input_file,
                                originalLine);
-    identifyError("found an illegal instruction", num0fLine);
-    return FALSE;
+    identifyError("An invalid instruction", num0fLine);
+    return FALSE;/*If none of the above match, it's an invalid instruction*/
 }
 
 int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int num0fLine, TagList *TagTemp) {
-    long value;
-    char validLineArray[MaxInputLength] = {0};/* store the received line  */
+    long value=0;
+    char validLineArray[MaxInputLength] = {0};
     char validLineArray2[MaxInputLength] = {0};
-    char *defineName;
+    char *defineName=NULL;
     if (make_copy(validLineArray, curLine)) {
+        /*Deletes white characters from both ends of the string*/
         removeLeftWSpaces(validLineArray);
         removeRightWSpaces(validLineArray);
-        defineName = strtok(validLineArray, " \t\n\v\f\r");/* cut the next word in the line */
-        curLine = strtok(NULL, "");/* cut the next word in the line */
+        defineName = strtok(validLineArray, " \t\n\v\f\r");/*Get define name from the line */
+        curLine = strtok(NULL, "");/*a pointer to the next word in the line */
         if (HandelTagName(defineName)) {
-            *TagTemp = SearchTag(*HeadTagList, defineName);
+            *TagTemp = SearchTag(*HeadTagList, defineName);/*Search for define name in the tag list*/
+            /*If the tag doesn't exist,and it's not a reserved word*/
             if (!(*TagTemp) && (!is_reserved_word(defineName))) {
-                *TagTemp = NewTag(defineName, *dataCounter);
-                /*remove white characters from the left and right of the string */
+                *TagTemp = NewTag(defineName, *dataCounter); /*Create a new tag*/
                 if (make_copy(validLineArray2, curLine)) {
+                    /*Deletes white characters from both ends of the string*/
                     removeRightWSpaces(validLineArray2);
                     removeLeftWSpaces(validLineArray2);
-                    if (validLineArray2[0] == '=') {
+                    if (validLineArray2[0] == '=') { /*Check if the line starts with '=' after define name */
                         validLineArray2[0] = ' ';
                         removeLeftWSpaces(validLineArray2);
+                        /*Check if the rest is a valid number*/
                         if (checkValidNumber(validLineArray2, TRUE)) {
                             value = strtol(validLineArray2, &curLine, 10);
                             setValueOrSize(*TagTemp, (int) value);
@@ -76,11 +82,14 @@ int checkDefineFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
 
 int checkAndReplaceDefine(TagList *HeadTagList, char *defineName, char originalLine[]) {
     char value[MaxInputLength] = {0};
-    TagList TagTemp = SearchTag(*HeadTagList, defineName);
+    TagList TagTemp = SearchTag(*HeadTagList, defineName);/*Search for the define tag in the tag list*/
+    /* Check if the tag is not found or if it's not of type MDEFINE (macro define)*/
     if (TagTemp == NULL || getType(TagTemp) != MDEFINE)
         return FALSE;
     else {
+        /*Convert the value of the define tag to string and store it in the 'value' array*/
         sprintf(value, "%d", getValueOrSize(TagTemp));
+        /*Write value into the original line*/
         WriteDefine(getName(TagTemp), value, originalLine);
         return TRUE;
     }
@@ -88,44 +97,52 @@ int checkAndReplaceDefine(TagList *HeadTagList, char *defineName, char originalL
 
 int checkEntryFormat(TagList *HeadTagList, char *tag, int *dataCounter, FILE *ValidEntryFile, int num0fLine,
                      TagList *TagTemp) {
-    char validLineArray[MaxInputLength];
-    if (*TagTemp != NULL) { /* if had a declaration of a label before .entry , then we delete the tag */
-        identifyWarning("found an entry instruction with a tag declared to it. new tag got deleted.", num0fLine);
+    char validLineArray[MaxInputLength]= {0};
+    if (*TagTemp != NULL) { /*   whether label before an .entry instruction, then the tag is deleted*/
+        identifyWarning(
+                "Deleting the new tag because an .entry instruction already exists with a tag with the same name.",
+                num0fLine);
         moveHead(HeadTagList);
     }
     if (tag != NULL) {
-        tag[strlen(tag) - 1] = '\0'; /* we are cutting the /n from it,*/
+        tag[strlen(tag) - 1] = '\0'; /*Remove newline character from the tag*/
         memset(validLineArray, 0, MaxInputLength);
         make_copy(validLineArray, tag);
         removeLeftWSpaces(validLineArray);
-        tag[strlen(tag) - 1] = '\0'; /* we are cutting the colon(:) from it,*/
+        removeRightWSpaces(validLineArray);
+        tag[strlen(tag) - 1] = '\0'; /* / Remove colon(:) from the tag*/
+        /*Check if all valid*/
         if (validLineArray[0] != '\0' &&
-            HandelTagName(validLineArray)) {/* if it .entry declaration and all valid, write it in entry file*/
+            HandelTagName(validLineArray)) {
+            /* write it in entry file*/
             fprintf(ValidEntryFile, "%s\n", validLineArray);
             return TRUE;
         }
         if (validLineArray[0] != '\0')
             printf("Error occurred at line %d: Invalid label name: %s\n", num0fLine, tag);
         else
-            identifyError("Found an entry instruction without any label!", num0fLine);
+            identifyError("An entry instruction was declared without any label with it", num0fLine);
         return FALSE;
     }
-    identifyError("Found an entry instruction without any label!", num0fLine);
+    identifyError("An entry instruction was declared without any label with it", num0fLine);
     return FALSE;
 }
 
 int checkExternFormat(TagList *HeadTagList, char *tag, int *dataCounter, int num0fLine, TagList *TagTemp) {
-    if (*TagTemp != NULL) { /* if had a declaration of a label before .extern , then we delete the tag */
-        identifyWarning("found an extern instruction with a tag declared to it. new tag got deleted.", num0fLine);
+    if (*TagTemp != NULL) {
+        identifyWarning(
+                "Deleting the new tag because an extern instruction already exists with a tag with the same name",
+                num0fLine);
         moveHead(HeadTagList);
-    }
+    }/*Check if the tag is not NULL and validate it as a label*/
     if (tag != NULL && HandelLabel(HeadTagList, tag, *dataCounter, num0fLine, TagTemp)) {
-        setType(*TagTemp, EXTERNAL);/*add the type of label, if it all valid and .extern declaration */
+        setType(*TagTemp,
+                EXTERNAL);/*Set the type of the label to EXTERNAL and address to 0 if it's a valid .extern declaration */
         setAddress(*TagTemp, 0);
         return TRUE;
     }
     if (!tag)
-        identifyError("Found an extern instruction without any label!", num0fLine);
+        identifyError("An external instruction was declared without any label with it", num0fLine);
     return FALSE;
 }
 
@@ -133,47 +150,48 @@ int checkStringFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int
     int i = 0;
     int Length = 0;
     int validStr = 0;
-    char validLineArray[MaxInputLength] = {0};/* store the received line  */
+    char validLineArray[MaxInputLength] = {0};
+    /*If there was a previous tag declaration before .string, set its address and type*/
     if (*TagTemp != NULL) {
         setAddress(*TagTemp, *dataCounter);
         setType(*TagTemp, DATA);
     }
     if (make_copy(validLineArray, curLine)) {
-        /*remove white characters from the left and right of the string */
+        /*Deletes white characters from both ends of the string*/
         removeRightWSpaces(validLineArray);
         removeLeftWSpaces(validLineArray);
-        if (validLineArray[i] != '\0') {
-            if (validLineArray[i] == '\"') { /*String must start with " */
-                for (i = 1;
-                     i < strlen(validLineArray) && validLineArray[i] != '\n' && validLineArray[i] != '\0' &&
-                     !validStr; i++) {
-                    Length++;
-                    if (validLineArray[i] == '\"')
-                        validStr = TRUE;/* valid string, ending with "*/
+        if (validLineArray[i] != '\0') {/*Check if the string is not empty*/
+            /* Check if the string starts with a double quote (") */
+            if (validLineArray[i] == '\"') {
+                for (i = 1; i < strlen(validLineArray) && validLineArray[i] != '\n' && validLineArray[i] != '\0' &&
+                            !validStr; i++) {
+                    Length++;/*count the amount of chars*/
+                    if (validLineArray[i] == '\"') /* Check if the string ends with a double quote (") */
+                        validStr = TRUE;
                 }
                 if (validStr && Length != 1) {
-                    *dataCounter = *dataCounter + Length; /*increase DC according to the amount of chars*/
+                    *dataCounter = *dataCounter + Length; /*increase DC according to Length*/
                     if (i == strlen(validLineArray))
                         return TRUE;
                     else {
-                        identifyError("Found invalid text after string", num0fLine);
+                        identifyError("Illegal characters were found after the string", num0fLine);
                         return FALSE;
                     }
                 } else {
                     if (!validStr)
-                        identifyError("valid string must end with \"", num0fLine);
+                        identifyError("Must appear \" at the end of the string", num0fLine);
                     else
-                        identifyError("Missing chars in .string instruction", num0fLine);
+                        identifyError("The .string instruction is empty - no characters", num0fLine);
                     return FALSE;
                 }
             }
-            identifyError("valid string must start with \"", num0fLine);
+            identifyError("Must appear \" at the start of the string", num0fLine);
             return FALSE;
         }
-        identifyError("only white spaces its not allow in string instruction", num0fLine);
+        identifyError(".string instruction must not contain only white characters", num0fLine);
         return FALSE;
     }
-    identifyError("Missing string in .string instruction!", num0fLine);
+    identifyError("In .string instruction It must contain a string", num0fLine);
     return FALSE;
 }
 
@@ -181,53 +199,56 @@ int checkDataFormat(TagList *HeadTagList, char *curLine, int *dataCounter, int n
                     long prevLocation,
                     FILE *inputFile, char originalLine[]) {
     int foundNumbers = 0;
-    char *nextNumber = NULL;
-    int sizeArray = 0;
+    char *nextNumber = NULL;/*Pointer to the next number in the input line*/
+    int sizeArray = 0; /*Size of the data array*/
     char validLineArray[MaxInputLength * 2] = {0};
-    char tempNumber[MaxInputLength] = {0};
+    char tempNumber[MaxInputLength] = {0};/*Temporary array to store each number*/
     if (*TagTemp != NULL) {
         setAddress(*TagTemp, *dataCounter);
         setType(*TagTemp, DATA);
     }
-    if (adding_space(curLine, validLineArray)) { /*adding space after comma*/
+    /*Add spaces after commas in the input line*/
+    if (adding_space(curLine, validLineArray)) {
+        /*Check if the current line is not empty and doesn't start or end with a comma*/
         if ((validLineArray[0] != '\0') && (validLineArray[0] != ',') &&
             (validLineArray[strlen(validLineArray) - 2] != ',')) {
             nextNumber = strtok(validLineArray, ",");
             while (nextNumber != NULL) {
                 memset(tempNumber, 0, MaxInputLength);
-                foundNumbers = TRUE;
+                foundNumbers = TRUE;/*Flag to track if numbers are found in the .data instruction*/
                 make_copy(tempNumber, nextNumber);
-                removeLeftWSpaces(tempNumber); /*remove white characters from the left of the string */
+                removeLeftWSpaces(tempNumber);
+                /*Check if the number is valid  and update the data counter*/
                 if (tempNumber[0] != '\0' && (checkValidNumber(tempNumber, TRUE) ||
                                               checkAndReplaceDefine(HeadTagList, tempNumber,
                                                                     originalLine))) {/*flag used to mark that the number cloud be 14 bit */
-                    (*dataCounter)++;/*increase DC according to the amount of numbers*/
+                    (*dataCounter)++;/*update DC*/
                     sizeArray++;
                     nextNumber = strtok(NULL, ",");
                     continue;
                 } else {
                     if (tempNumber[0] == '\0')
-                        identifyError("between two commas must be number", num0fLine);
+                        identifyError("A comma must separate two numbers", num0fLine);
                     else if (isdigit(tempNumber[0]) == 0)
-                        printf("Error occurred at line %d: define '%s' invalid! \n", num0fLine, tempNumber);
+                        printf("Error occurred at line %d: invalid define '%s' \n", num0fLine, tempNumber);
                     else
-                        printf("Error occurred at line %d: number '%s' invalid in .data instruction! \n", num0fLine,
+                        printf("Error occurred at line %d: .data instruction has illegal number '%s' \n", num0fLine,
                                tempNumber);
                     return FALSE;
                 }
             }
             if (!foundNumbers)
-                identifyError("found a .data instruction without any numbers", num0fLine);
+                identifyError("In .data instruction It must contain numbers", num0fLine);
             if (*TagTemp != NULL)
                 setValueOrSize(*TagTemp, sizeArray);
             return foundNumbers;
         }
     }
     if (!curLine || validLineArray[0] == '\0')
-        identifyError("Missing numbers in .data instruction", num0fLine);
+        identifyError(".data instruction must contain numbers", num0fLine);
     else if (validLineArray[0] == ',')
-        identifyError("Invalid ',' at the beginning of .data instruction", num0fLine);
+        identifyError("In .data instruction comma cannot appear at the beginning", num0fLine);
     else
-        identifyError("Invalid ',' at the end of .data instruction", num0fLine);
+        identifyError("In .data instruction comma cannot appear at the end", num0fLine);
     return FALSE;
 }
