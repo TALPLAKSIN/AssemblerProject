@@ -1,8 +1,8 @@
 #ifndef MCRLIST_H
 #define MCRLIST_H
 
-#define TRUE 1
 #define MAX_MCR_LENGTH 32
+#define TRUE 1
 #define FALSE 0
 
 /*A pointer to a new_mcr list*/
