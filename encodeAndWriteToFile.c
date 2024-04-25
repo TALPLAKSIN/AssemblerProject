@@ -16,18 +16,23 @@ int convertFileToBase4(char *file_name, TagList *HeadTagList, int *flagsArray) {
     int numOfLine = 0;
 
     printf("Beginning second iteration on the file: %s...\n", file_name);
-    if (flagsArray[EX]) /* we will create extern_file only if needed*/
+    if (flagsArray[EX]!=NOT_OCCUR) /*If there is an indication of an external label we will create a suitable file*/
         extern_file = openTheFile(file_name, "ext", "w+");
     /*open files*/
     input_file = openTheFile(file_name, "am", "r");
     instructions_file = openTheFile(file_name, "cmd", "w+");
     data_file = openTheFile(file_name, "data", "w+");
-    fprintf(instructions_file, "\t%d\t%d\n", flagsArray[ICcounter] - 100, flagsArray[DCcounter]); /*write IC and DC*/
+    /*write Instruction counter and Data counter*/
+    fprintf(instructions_file, "\t%d\t%d\n", flagsArray[ICcounter] - 100, flagsArray[DCcounter]);
+    /*A call to a method that will perform all the tests and
+     * create the appropriate file if necessary for an entry label*/
     dealWithEntry(file_name, HeadTagList, entry_file, flagsArray);
-    while (!feof(input_file)) {/*over the file line by line*/
+    /*Encoding the file by traversing the entire file*/
+    while (!feof(input_file)) {
+        /*Receiving a row from the file and copying it to two auxiliary arrays*/
         readAndCopyRow(input_file, currLine, originalLine);
-        numOfLine++;/*count lines*/
-        current_word = strtok(currLine, " \t\n\v\f\r");/*A word we cut from the current line*/
+        numOfLine++;
+        current_word = strtok(currLine, " \t\n\v\f\r");/*save the current word*/
         if (!current_word || current_word[0] == ';')/*A comment or a blank line*/
             continue;
         if (current_word[strlen(current_word) - 1] == ':')/*Checking whether a label*/
@@ -39,21 +44,22 @@ int convertFileToBase4(char *file_name, TagList *HeadTagList, int *flagsArray) {
     }
     printf("Complete second pass on file.\n");
     unitesFiles(file_name, instructions_file, data_file);/* combining 2 files in to final object file*/
-    finishFiles(file_name, input_file, entry_file, extern_file, instructions_file,
-                data_file);/*  free/delete all memory we used*/
+    /*  free/delete all memory we used*/
+    finishFiles(file_name, input_file, entry_file, extern_file, instructions_file,data_file);
     return 0;
 }
 
 void dealWithEntry(char *file_name, TagList *HeadTagList, FILE *entry_file, int *flagsArray) {
     TagList temp = *HeadTagList;
-    if (flagsArray[EN]) { /*create entry_file only if needed*/
+    /*If there is an indication of an entry label we will create a suitable file*/
+    if (flagsArray[EN]!=NOT_OCCUR) {
         entry_file = openTheFile(file_name, "ent", "w+");
-        while (temp != NULL) {
+        while (temp != NULL) {/*Throw allover the TagList*/
             if (getType(temp) == ENTRY) {
-                /*we check all the tagList, if the tag is type of .entry we will write it on the entry file*/
+                /*Checking type equal ENTRY and write it*/
                 fprintf(entry_file, "%s\t", getName(temp));
                 if (getAddress(temp) < 1000)
-                    fprintf(entry_file, "0");
+                    fprintf(entry_file, "0");/*complete '0' to the file if necessary*/
                 fprintf(entry_file, "%d\n", getAddress(temp));
             }
             temp = getNextTag(temp);
